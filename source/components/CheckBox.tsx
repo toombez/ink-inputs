@@ -1,34 +1,31 @@
 import React, { useState, useEffect } from 'react'
-import { Box, Text, useInput, TextProps, BoxProps } from "ink"
+import { Box, Text, useInput, BoxProps } from "ink"
 
 import useFocusHandler, { UseFocusHandlerProps } from '../hooks/useFocusHandler.js'
 
 interface CheckBoxIndicatorProps {
     isFocused?: boolean
     isChecked?: boolean
-    textProps?: TextProps
 }
 
 const CheckBoxIndicator: React.FC<CheckBoxIndicatorProps> = ({
     isChecked,
-    textProps,
 }) => {
     const checkBoxSymbol = isChecked ? '□' : '■'
 
-    return <Text {...textProps} >{ checkBoxSymbol }</Text>
+    return <Text>{ checkBoxSymbol }</Text>
 }
 
 interface CheckBoxLabelProps {
     label?: string
     isFocused?: boolean
-    textProps?: TextProps
+    isChecked?: boolean
 }
 
 const CheckBoxLabel: React.FC<CheckBoxLabelProps> = ({
     label,
-    textProps,
 }) => {
-    return <Text {...textProps} >{label}</Text>
+    return <Text>{label}</Text>
 }
 
 interface CheckBoxProps {
@@ -37,6 +34,8 @@ interface CheckBoxProps {
     label?: string
     focusOptions?: UseFocusHandlerProps['focusOptions']
     boxProps?: BoxProps
+    indicatorComponent?: React.FC<CheckBoxIndicatorProps>
+    labelComponent?: React.FC<CheckBoxLabelProps>
 }
 
 const CheckBox: React.FC<CheckBoxProps> = ({
@@ -45,6 +44,8 @@ const CheckBox: React.FC<CheckBoxProps> = ({
     label,
     focusOptions,
     boxProps,
+    indicatorComponent = CheckBoxIndicator,
+    labelComponent = CheckBoxLabel
 }) => {
     const {
         isFocused,
@@ -74,12 +75,11 @@ const CheckBox: React.FC<CheckBoxProps> = ({
     }, [isChecked])
 
     return <Box {...boxProps} >
-        <CheckBoxIndicator isChecked={isChecked} isFocused={isFocused} />
-        { label &&
-            <Box paddingLeft={1}>
-                <CheckBoxLabel label={label} isFocused={isFocused} />
-            </Box>
-        }
+        { React.createElement(indicatorComponent, { isChecked, isFocused }) }
+
+        { label && <Box paddingLeft={1}>
+            { React.createElement(labelComponent, { isFocused, label, isChecked }) }
+        </Box> }
     </Box>
 }
 
