@@ -1,0 +1,12 @@
+{
+    "extends": "@sindresorhus/tsconfig",
+    "compilerOptions": {
+        "module": "ES2020",
+        "jsx": "react",
+        "esModuleInterop": true,
+        "outDir": "lib",
+        "typeRoots": ["./node_modules/@types"],
+        "moduleResolution": "node16",
+    },
+    "include": ["source"]
+}
