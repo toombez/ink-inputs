@@ -16,19 +16,29 @@ const CheckBoxIndicator: React.FC<CheckBoxIndicatorProps> = ({
 }
 
 interface CheckBoxProps {
-    onFocus?: UseFocusHandlerProps['handler'],
+    onFocus?: UseFocusHandlerProps['handler']
+    onChange?: (value: boolean) => void
     focusOptions?: UseFocusHandlerProps['focusOptions']
+    boxProps?: BoxProps
 }
 
 const CheckBox: React.FC<CheckBoxProps> = ({
     onFocus,
+    onChange,
     focusOptions,
+    boxProps,
 }) => {
-    useFocusHandler({ handler: onFocus, focusOptions })
+    const {
+        isFocused,
+    } = useFocusHandler({ handler: onFocus, focusOptions })
 
     const [isChecked, setIsChecked] = useState(false)
 
     useInput((input, key) => {
+        if (!isFocused) {
+            return
+        }
+
         const isEnterPressed = key.return
         const isSpacePressed = input === ' '
 
@@ -37,8 +47,16 @@ const CheckBox: React.FC<CheckBoxProps> = ({
         }
     })
 
-    return <Box>
-        <CheckBoxIndicator isChecked={isChecked} />
+    useEffect(() => {
+        if (!onChange) {
+            return
+        }
+
+        onChange(isChecked)
+    }, [isChecked])
+
+    return <Box {...boxProps} >
+        <CheckBoxIndicator isChecked={isChecked} isFocused={isFocused} />
     </Box>
 }
 
