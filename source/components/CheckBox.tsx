@@ -3,6 +3,18 @@ import { Box, Text, useInput } from "ink"
 
 import { useFocusHandler, UseFocusHandlerProps } from '../hooks/useFocusHandler.js'
 
+interface CheckBoxIndicatorProps {
+    isChecked?: boolean
+}
+
+const CheckBoxIndicator: React.FC<CheckBoxIndicatorProps> = ({
+    isChecked,
+}) => {
+    const checkBoxSymbol = isChecked ? '□' : '■'
+
+    return <Text>{ checkBoxSymbol }</Text>
+}
+
 interface CheckBoxProps {
     onFocus?: UseFocusHandlerProps['handler'],
     focusOptions?: UseFocusHandlerProps['focusOptions']
@@ -16,8 +28,6 @@ const CheckBox: React.FC<CheckBoxProps> = ({
 
     const [isChecked, setIsChecked] = useState(false)
 
-    const checkBoxSymbol = isChecked ? '□' : '■'
-
     useInput((input, key) => {
         const isEnterPressed = key.return
         const isSpacePressed = input === ' '
@@ -28,9 +38,16 @@ const CheckBox: React.FC<CheckBoxProps> = ({
     })
 
     return <Box>
-        <Text>{checkBoxSymbol}</Text>
+        <CheckBoxIndicator isChecked={isChecked} />
     </Box>
 }
 
 export default CheckBox
-export { CheckBox }
+export type {
+    CheckBoxIndicatorProps,
+    CheckBoxProps,
+}
+export {
+    CheckBoxIndicator,
+    CheckBox,
+}
