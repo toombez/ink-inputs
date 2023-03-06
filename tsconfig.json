@@ -7,6 +7,10 @@
         "outDir": "lib",
         "typeRoots": ["./node_modules/@types"],
         "moduleResolution": "node16",
+
+        "allowUnusedLabels": true,
+        "noUnusedLocals": false,
+        "noUnusedParameters": false,
     },
     "include": ["source"]
 }
