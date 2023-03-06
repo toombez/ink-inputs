@@ -1,13 +1,24 @@
 import React from 'react'
-import { Box, BoxProps, Text, useFocus, useInput } from "ink"
+import { Box, useInput } from "ink"
 import useFocusHandler, { UseFocusHandlerProps } from '../hooks/useFocusHandler.js'
+
+interface ButtonWrapperProps {
+    isFocused?: boolean
+    children?: JSX.Element | JSX.Element[]
+}
+
+const ButtonWrapper: React.FC<ButtonWrapperProps> = ({
+    children
+}) => {
+    return <Box>{children}</Box>
+}
 
 interface ButtonProps {
     onClick?: () => void
     onFocus?: UseFocusHandlerProps['handler']
     focusOptions?: UseFocusHandlerProps['focusOptions']
     children?: string | JSX.Element | JSX.Element[]
-    boxProps?: BoxProps
+    wrapperComponent?: React.FC<ButtonWrapperProps>
 }
 
 const Button: React.FC<ButtonProps> = ({
@@ -15,7 +26,7 @@ const Button: React.FC<ButtonProps> = ({
     onFocus,
     focusOptions,
     children,
-    boxProps,
+    wrapperComponent = ButtonWrapper
 }) => {
     const { isFocused } = useFocusHandler({ handler: onFocus, focusOptions})
 
@@ -27,9 +38,7 @@ const Button: React.FC<ButtonProps> = ({
         onClick()
     })
 
-    return <Box {...boxProps} >
-        {children}
-    </Box>
+    return React.createElement(wrapperComponent, { isFocused }, children)
 }
 
 export default Button
