@@ -1,5 +1,5 @@
 import React from 'react'
-import { Box, Text, useFocus, useInput } from "ink"
+import { Box, BoxProps, Text, useFocus, useInput } from "ink"
 import useFocusHandler, { UseFocusHandlerProps } from '../hooks/useFocusHandler.js'
 
 interface ButtonProps {
@@ -7,13 +7,15 @@ interface ButtonProps {
     onFocus?: UseFocusHandlerProps['handler']
     focusOptions?: UseFocusHandlerProps['focusOptions']
     children?: string | JSX.Element | JSX.Element[]
+    boxProps?: BoxProps
 }
 
 const Button: React.FC<ButtonProps> = ({
     onClick,
     onFocus,
     focusOptions,
-    children
+    children,
+    boxProps,
 }) => {
     const { isFocused } = useFocusHandler({ handler: onFocus, focusOptions})
 
@@ -25,7 +27,7 @@ const Button: React.FC<ButtonProps> = ({
         onClick()
     })
 
-    return <Box>
+    return <Box {...boxProps} >
         {children}
     </Box>
 }
