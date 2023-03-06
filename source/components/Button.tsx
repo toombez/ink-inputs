@@ -13,20 +13,33 @@ const ButtonWrapper: React.FC<ButtonWrapperProps> = ({
     return <Box>{children}</Box>
 }
 
+interface ButtonContentProps {
+    isFocused?: boolean
+    children?: JSX.Element | JSX.Element[]
+}
+
+const ButtonContent: React.FC<ButtonContentProps> = ({children}) => {
+    return <>
+        {children}
+    </>
+}
+
 interface ButtonProps {
     onClick?: () => void
     onFocus?: UseFocusHandlerProps['handler']
     focusOptions?: UseFocusHandlerProps['focusOptions']
-    children?: string | JSX.Element | JSX.Element[]
+    children?: JSX.Element | JSX.Element[]
     wrapperComponent?: React.FC<ButtonWrapperProps>
+    contentComponent?: React.FC<ButtonContentProps>
 }
 
 const Button: React.FC<ButtonProps> = ({
+    wrapperComponent = ButtonWrapper,
+    contentComponent = ButtonContent,
+    children,
+    focusOptions,
     onClick,
     onFocus,
-    focusOptions,
-    children,
-    wrapperComponent = ButtonWrapper
 }) => {
     const { isFocused } = useFocusHandler({ handler: onFocus, focusOptions})
 
@@ -38,7 +51,9 @@ const Button: React.FC<ButtonProps> = ({
         onClick()
     })
 
-    return React.createElement(wrapperComponent, { isFocused }, children)
+    return React.createElement(wrapperComponent, { isFocused },
+        React.createElement(contentComponent, { children, isFocused })
+    )
 }
 
 export default Button
