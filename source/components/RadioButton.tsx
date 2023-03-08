@@ -36,6 +36,35 @@ const RadioButtonWrapper: React.FC<RadioButtonWrapperProps> = ({
     return <Box>{children}</Box>
 }
 
+type RadioButtonProps = {
+    LabelComponent?: React.FC<RadioButtonLabelProps>
+    IndicatorComponent?: React.FC<RadioButtonIndicatorProps>
+    WrapperComponent?: React.FC<RadioButtonWrapperProps>
+    isChecked?: boolean
+    isFocused?: boolean
+    label?: string
+}
+
+const RadioButton: React.FC<RadioButtonProps> = ({
+    IndicatorComponent = RadioButtonIndicator,
+    LabelComponent = RadioButtonLabel,
+    WrapperComponent = RadioButtonWrapper,
+    isChecked,
+    isFocused,
+    label,
+}) => {
+    return <WrapperComponent isChecked={isChecked} isFocused={isFocused}>
+        <IndicatorComponent isChecked={isChecked} isFocused={isFocused} />
+        {label && <Box marginLeft={1}>
+            <LabelComponent
+                label={label}
+                isChecked={isChecked}
+                isFocused={isFocused}
+            />
+        </Box>}
+    </WrapperComponent>
+}
+
 export {
     RadioButtonIndicator,
     RadioButtonLabel,
