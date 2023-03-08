@@ -1,5 +1,5 @@
 import React from 'react'
-import { Text } from "ink"
+import { Box, Text } from "ink"
 
 type RadioButtonIndicatorProps = {
     isChecked?: boolean
@@ -12,9 +12,23 @@ const RadioButtonIndicator: React.FC<RadioButtonIndicatorProps> = ({
     return <Text>{isChecked}</Text>
 }
 
+type RadioButtonLabelProps = {
+    isChecked?: boolean
+    isFocused?: boolean
+    label: string
+}
+
+const RadioButtonLabel: React.FC<RadioButtonLabelProps> = ({
+    label,
+}) => {
+    return <Text>{label}</Text>
+}
+
 export {
-    RadioButtonIndicator
+    RadioButtonIndicator,
+    RadioButtonLabel,
 }
 export type {
-    RadioButtonIndicatorProps
+    RadioButtonIndicatorProps,
+    RadioButtonLabelProps,
 }
