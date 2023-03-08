@@ -1,6 +1,7 @@
 import React, {useState, type FC} from 'react'
 import {Box, Text} from 'ink'
 import Button, {  } from './components/Button.js'
+import RadioButton from './components/RadioButton.js'
 
 const App: FC<{name?: string}> = ({name = 'Stranger'}) => {
     const [c, setC] = useState(0)
@@ -27,6 +28,11 @@ const App: FC<{name?: string}> = ({name = 'Stranger'}) => {
                 </Box>
             }}
             onClick={() => setC(v => --v)}
+        />
+        <RadioButton
+            IndicatorComponent={({ isChecked }) => {
+                return <Text>{`${isChecked}`}</Text>
+            }}
         />
         <Text>
             { c }

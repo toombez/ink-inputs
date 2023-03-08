@@ -1,6 +1,7 @@
-import React, { PropsWithChildren } from 'react'
-import { Box, Text } from "ink"
+import React, { PropsWithChildren, useState } from 'react'
+import { Box, Text, useInput } from "ink"
 import figures from 'figures'
+import useFocusHandler, { UseFocusHandlerProps } from '../hooks/useFocusHandler.js'
 
 type RadioButtonIndicatorProps = {
     isChecked?: boolean
@@ -40,19 +41,33 @@ type RadioButtonProps = {
     LabelComponent?: React.FC<RadioButtonLabelProps>
     IndicatorComponent?: React.FC<RadioButtonIndicatorProps>
     WrapperComponent?: React.FC<RadioButtonWrapperProps>
-    isChecked?: boolean
-    isFocused?: boolean
     label?: string
+    focusOptions?: UseFocusHandlerProps['focusOptions']
+    onFocus?: UseFocusHandlerProps['handler']
+    onChange?: (value: boolean) => void
 }
 
 const RadioButton: React.FC<RadioButtonProps> = ({
     IndicatorComponent = RadioButtonIndicator,
     LabelComponent = RadioButtonLabel,
     WrapperComponent = RadioButtonWrapper,
-    isChecked,
-    isFocused,
     label,
+    focusOptions,
+    onChange = () => {},
+    onFocus,
 }) => {
+    const [isChecked, setIsChecked] = useState(false)
+    const { isFocused } = useFocusHandler({ handler: onFocus, focusOptions})
+
+    useInput((input, key) => {
+        if (!key.return && input !== ' ') {
+            return
+        }
+
+        setIsChecked((v) => !v)
+        onChange(isChecked)
+    })
+
     return <WrapperComponent isChecked={isChecked} isFocused={isFocused}>
         <IndicatorComponent isChecked={isChecked} isFocused={isFocused} />
         {label && <Box marginLeft={1}>
@@ -65,13 +80,18 @@ const RadioButton: React.FC<RadioButtonProps> = ({
     </WrapperComponent>
 }
 
+export default RadioButton
 export {
     RadioButtonIndicator,
     RadioButtonLabel,
     RadioButtonWrapper,
+
+    RadioButton,
 }
 export type {
     RadioButtonIndicatorProps,
     RadioButtonLabelProps,
     RadioButtonWrapperProps,
+
+    RadioButtonProps,
 }
