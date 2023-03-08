@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { PropsWithChildren } from 'react'
 import { Box, Text } from "ink"
 import figures from 'figures'
 
@@ -25,11 +25,24 @@ const RadioButtonLabel: React.FC<RadioButtonLabelProps> = ({
     return <Text>{label}</Text>
 }
 
+type RadioButtonWrapperProps = {
+    isFocused?: boolean
+    isChecked?: boolean
+} & PropsWithChildren
+
+const RadioButtonWrapper: React.FC<RadioButtonWrapperProps> = ({
+    children,
+}) => {
+    return <Box>{children}</Box>
+}
+
 export {
     RadioButtonIndicator,
     RadioButtonLabel,
+    RadioButtonWrapper,
 }
 export type {
     RadioButtonIndicatorProps,
     RadioButtonLabelProps,
+    RadioButtonWrapperProps,
 }
