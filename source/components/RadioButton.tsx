@@ -1,5 +1,6 @@
 import React from 'react'
 import { Box, Text } from "ink"
+import figures from 'figures'
 
 type RadioButtonIndicatorProps = {
     isChecked?: boolean
@@ -9,7 +10,7 @@ type RadioButtonIndicatorProps = {
 const RadioButtonIndicator: React.FC<RadioButtonIndicatorProps> = ({
     isChecked,
 }) => {
-    return <Text>{isChecked}</Text>
+    return <Text>{isChecked ? figures.radioOn : figures.radioOff}</Text>
 }
 
 type RadioButtonLabelProps = {
