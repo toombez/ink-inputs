@@ -78,13 +78,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/yoga-layout@npm:1.9.2":
-  version: 1.9.2
-  resolution: "@types/yoga-layout@npm:1.9.2"
-  checksum: dbc3d6ab997d50fe1fcca5dd6822982c8fe586145ab648e0e97c3bc4ebc93d0b40c9edd75febaba374d61f60c1379b639f6be652965c776a901bf1068f2eac87
-  languageName: node
-  linkType: hard
-
 "ansi-escapes@npm:^6.0.0":
   version: 6.0.0
   resolution: "ansi-escapes@npm:6.0.0"
@@ -110,7 +103,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"ansi-styles@npm:^6.0.0, ansi-styles@npm:^6.1.0":
+"ansi-styles@npm:^6.0.0, ansi-styles@npm:^6.1.0, ansi-styles@npm:^6.2.1":
   version: 6.2.1
   resolution: "ansi-styles@npm:6.2.1"
   checksum: ef940f2f0ced1a6347398da88a91da7930c33ecac3c77b72c5905f8b8fe402c52e6fde304ff5347f616e27a742da3f1dc76de98f6866c69251ad0b07a66776d9
@@ -390,18 +383,18 @@ __metadata:
     "@sindresorhus/tsconfig": ^3.0.1
     "@types/react": ^18.0.28
     figures: ^5.0.0
-    ink: ^4.0.0
+    ink: ^4.1.0
     meow: ^11.0.0
     react: ^18.2.0
-    typescript: ^4.9.5
+    typescript: ^5.0.2
   bin:
     ink-inputs: lib/cli.js
   languageName: unknown
   linkType: soft
 
-"ink@npm:^4.0.0":
-  version: 4.0.0
-  resolution: "ink@npm:4.0.0"
+"ink@npm:^4.1.0":
+  version: 4.1.0
+  resolution: "ink@npm:4.1.0"
   dependencies:
     ansi-escapes: ^6.0.0
     auto-bind: ^5.0.1
@@ -412,19 +405,19 @@ __metadata:
     code-excerpt: ^4.0.0
     indent-string: ^5.0.0
     is-ci: ^3.0.1
-    lodash-es: ^4.17.21
+    lodash: ^4.17.21
     patch-console: ^2.0.0
     react-reconciler: ^0.29.0
     scheduler: ^0.23.0
     signal-exit: ^3.0.7
-    slice-ansi: ^5.0.0
+    slice-ansi: ^6.0.0
     stack-utils: ^2.0.6
     string-width: ^5.1.2
     type-fest: ^0.12.0
     widest-line: ^4.0.1
     wrap-ansi: ^8.1.0
     ws: ^8.12.0
-    yoga-layout-prebuilt: ^1.9.6
+    yoga-wasm-web: ~0.3.3
   peerDependencies:
     "@types/react": ">=18.0.0"
     react: ">=18.0.0"
@@ -434,7 +427,7 @@ __metadata:
       optional: true
     react-devtools-core:
       optional: true
-  checksum: 7cd120ed6589e17ea4f8c0abcfeac37e3afb3d6c5b82342a7996f0a15a1a4d1ba933f926ae8e5539dd8adea3e6cfbcf5d4025d82c1d917fbcf8fc56f92213f63
+  checksum: f854511b122764e4f49f93e8921cf70f0f2f9cfdaba0a0a765d3976b4146b732e4b6bdb1b3c01fb157c4ce952746a4f685cb7879ae386b8313be974e6e661726
   languageName: node
   linkType: hard
 
@@ -523,10 +516,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"lodash-es@npm:^4.17.21":
+"lodash@npm:^4.17.21":
   version: 4.17.21
-  resolution: "lodash-es@npm:4.17.21"
-  checksum: 05cbffad6e2adbb331a4e16fbd826e7faee403a1a04873b82b42c0f22090f280839f85b95393f487c1303c8a3d2a010048bf06151a6cbe03eee4d388fb0a12d2
+  resolution: "lodash@npm:4.17.21"
+  checksum: eb835a2e51d381e561e508ce932ea50a8e5a68f4ebdd771ea240d3048244a8d13658acbd502cd4829768c56f2e16bdd4340b9ea141297d472517b83868e677f7
   languageName: node
   linkType: hard
 
@@ -801,6 +794,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"slice-ansi@npm:^6.0.0":
+  version: 6.0.0
+  resolution: "slice-ansi@npm:6.0.0"
+  dependencies:
+    ansi-styles: ^6.2.1
+    is-fullwidth-code-point: ^4.0.0
+  checksum: d0510f02af166eff9948e7cf88985c33d9ded6de0e39908b67b5e29f802c88025c27d7e1801ce1d1d1ec311fb539538086cd2a4193d2e8f735e6c5c0e63486dd
+  languageName: node
+  linkType: hard
+
 "spdx-correct@npm:^3.0.0":
   version: 3.1.1
   resolution: "spdx-correct@npm:3.1.1"
@@ -910,23 +913,23 @@ __metadata:
   languageName: node
   linkType: hard
 
-"typescript@npm:^4.9.5":
-  version: 4.9.5
-  resolution: "typescript@npm:4.9.5"
+"typescript@npm:^5.0.2":
+  version: 5.0.2
+  resolution: "typescript@npm:5.0.2"
   bin:
     tsc: bin/tsc
     tsserver: bin/tsserver
-  checksum: ee000bc26848147ad423b581bd250075662a354d84f0e06eb76d3b892328d8d4440b7487b5a83e851b12b255f55d71835b008a66cbf8f255a11e4400159237db
+  checksum: bef1dcd166acfc6934b2ec4d72f93edb8961a5fab36b8dd2aaf6f4f4cd5c0210f2e0850aef4724f3b4913d5aef203a94a28ded731b370880c8bcff7e4ff91fc1
   languageName: node
   linkType: hard
 
-"typescript@patch:typescript@^4.9.5#~builtin<compat/typescript>":
-  version: 4.9.5
-  resolution: "typescript@patch:typescript@npm%3A4.9.5#~builtin<compat/typescript>::version=4.9.5&hash=23ec76"
+"typescript@patch:typescript@^5.0.2#~builtin<compat/typescript>":
+  version: 5.0.2
+  resolution: "typescript@patch:typescript@npm%3A5.0.2#~builtin<compat/typescript>::version=5.0.2&hash=1f5320"
   bin:
     tsc: bin/tsc
     tsserver: bin/tsserver
-  checksum: ab417a2f398380c90a6cf5a5f74badd17866adf57f1165617d6a551f059c3ba0a3e4da0d147b3ac5681db9ac76a303c5876394b13b3de75fdd5b1eaa06181c9d
+  checksum: bdbf3d0aac0d6cf010fbe0536753dc19f278eb4aba88140dcd25487dfe1c56ca8b33abc0dcd42078790a939b08ebc4046f3e9bb961d77d3d2c3cfa9829da4d53
   languageName: node
   linkType: hard
 
@@ -996,11 +999,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"yoga-layout-prebuilt@npm:^1.9.6":
-  version: 1.10.0
-  resolution: "yoga-layout-prebuilt@npm:1.10.0"
-  dependencies:
-    "@types/yoga-layout": 1.9.2
-  checksum: 6954c7c7b04c585a1c974391bea4734611adb85702b5e9131549a1d3dc5b94e69bcfea34121cdaeb5e702663bf290fcce5374910128e54d1031503a57c062865
+"yoga-wasm-web@npm:~0.3.3":
+  version: 0.3.3
+  resolution: "yoga-wasm-web@npm:0.3.3"
+  checksum: ff65192a832975ff531a1b6eae160c2da859c250feaa58b6389b684f9b48f53fda849a7ea49d12d241198309e671e6bd230a44e7155af9573d7843ac48831c98
   languageName: node
   linkType: hard
