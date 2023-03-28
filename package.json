@@ -5,8 +5,7 @@
   "type": "module",
   "scripts": {
     "build": "tsc",
-    "start": "node lib/cli.js",
-    "dev": "yarn run build && yarn run start"
+    "dev": "nodemon --no-stdin -L --loader ts-node/esm ./src/cli.tsx"
   },
   "dependencies": {
     "figures": "^5.0.0",
@@ -17,6 +16,8 @@
   "devDependencies": {
     "@sindresorhus/tsconfig": "^3.0.1",
     "@types/react": "^18.0.28",
+    "nodemon": "^2.0.22",
+    "ts-node": "^10.9.1",
     "typescript": "^5.0.2"
   },
   "packageManager": "yarn@3.4.1",
