@@ -8,7 +8,7 @@
 
 #### Default button usage
 
-```jsx
+```JSX
 import { Button } from 'ink-inputs/Button'
 
 const App = () => (
@@ -19,7 +19,7 @@ const App = () => (
 ```
 
 #### Custom button usage
-```jsx
+```JSX
 import React from 'react'
 import { Box, Text, TextProps } from 'ink'
 import {
