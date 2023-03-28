@@ -1,16 +1,22 @@
 {
     "extends": "@sindresorhus/tsconfig",
     "compilerOptions": {
-        "module": "ES2020",
-        "jsx": "react",
+        "moduleResolution": "node16",
+        "module": "Node16",
         "esModuleInterop": true,
         "outDir": "lib",
-        "typeRoots": ["./node_modules/@types"],
-        "moduleResolution": "node16",
+        "sourceMap": true,
+        "jsx": "react",
 
         "allowUnusedLabels": true,
         "noUnusedLocals": false,
         "noUnusedParameters": false,
     },
-    "include": ["source"]
+    "include": ["src"],
+    "ts-node": {
+        "transpileOnly": true,
+        "files": true,
+        "experimentalResolver": true,
+        "experimentalSpecifierResolution": "node",
+    }
 }
