@@ -1,93 +1,70 @@
 import React from 'react'
-import { Box, useInput } from "ink"
-import useFocusHandler, { UseFocusHandlerProps } from '../hooks/useFocusHandler.js'
-import { InkChildren } from '../types.js'
+import { InkChildren, handler, useFocusOptions } from '../types.js'
+import { useButton } from '../hooks/useButton.js'
 
 /**
- * Props for button wrapper component
+ * Button render props
  */
-interface ButtonWrapperProps {
+interface ButtonRenderProps {
     isFocused?: boolean
     children?: InkChildren
 }
 
 /**
- * Component for wrap `content` passed in button
- * @param props
+ * Button render props omited children
  */
-const ButtonWrapper: React.FC<ButtonWrapperProps> = ({
-    children
-}) => {
-    return <Box>{children}</Box>
-}
+type ButtonRenderPropsWithoutChildrent = Omit<ButtonRenderProps, 'children'>
 
 /**
- * Props for button content component
+ * Button render function
  */
-interface ButtonContentProps {
-    isFocused?: boolean
-    children?: InkChildren
-}
+
+type ButtonRender = React.FC<ButtonRenderProps>
+/**
+ * Button render function without children
+ */
+type ButtonRenderWithoutChildren = React.FC<ButtonRenderPropsWithoutChildrent>
 
 /**
- * Component for displaying button `content` passed as children
- * @param props
- */
-const ButtonContent: React.FC<ButtonContentProps> = ({children}) => {
-    return <>
-        {children}
-    </>
-}
-
-/**
- * Props for root `button` component
+ * Button props
  */
 interface ButtonProps {
-    onClick?: () => void
-    onFocus?: UseFocusHandlerProps['handler']
-    focusOptions?: UseFocusHandlerProps['focusOptions']
-    children?: InkChildren
-    wrapperComponent?: React.FC<ButtonWrapperProps>
-    contentComponent?: React.FC<ButtonContentProps>
+    onClick?: handler
+    onFocus?: handler
+    onBlur?: handler
+
+    children?: ButtonRenderWithoutChildren | InkChildren
+    render?: ButtonRender
+    focusOptions?: useFocusOptions
 }
 
-/**
- * Component for root button element
- * @param props
- */
 const Button: React.FC<ButtonProps> = ({
-    wrapperComponent = ButtonWrapper,
-    contentComponent = ButtonContent,
-    children,
-    focusOptions,
+    onBlur,
     onClick,
     onFocus,
+
+    children,
+    render = ({ children }) => <>{children}</>,
+    focusOptions,
 }) => {
-    const { isFocused } = useFocusHandler({ handler: onFocus, focusOptions})
+    const { isFocused } = useButton({
+        clickHandler: onClick,
+        focusHandler: onFocus,
+        blurHandler: onBlur,
 
-    useInput((_, key) => {
-        if (!isFocused || !key.return || !onClick) {
-            return
-        }
-
-        onClick()
+        focusOptions,
     })
 
-    return React.createElement(
-        wrapperComponent,
-        { isFocused },
-        React.createElement(contentComponent, { children, isFocused })
-    )
+    const _children = typeof children === 'function'
+        ? React.createElement(children, { isFocused })
+        : children
+
+    const _render = React.createElement(render, {
+        isFocused,
+        children: _children
+    })
+
+    return _render
 }
 
 export default Button
-export {
-    ButtonWrapper,
-    ButtonContent,
-    Button,
-}
-export type {
-    ButtonWrapperProps,
-    ButtonContentProps,
-    ButtonProps,
-}
