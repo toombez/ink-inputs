@@ -1,13 +1,12 @@
-import { Box } from 'ink'
+import { Box, Text } from 'ink'
 import React from 'react'
 import ButtonExample from './examples/Button.js'
-import InputExample from './examples/Input.js'
 
 const App = ({ name }: { name?: string }) => {
     return (
-        <Box>
-            {/* <ButtonExample /> */}
-            <InputExample />
+        <Box flexDirection='column' borderStyle='single'>
+            <Text>Lorem, ipsum.</Text>
+            <ButtonExample />
         </Box>
     )
 }
