@@ -18,6 +18,7 @@
     "@types/react": "^18.0.28",
     "nodemon": "^2.0.22",
     "ts-node": "^10.9.1",
+    "tsup": "^6.7.0",
     "typescript": "^5.0.2"
   },
   "packageManager": "yarn@3.4.1",
