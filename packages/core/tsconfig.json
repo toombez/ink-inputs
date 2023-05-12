@@ -1,0 +1,7 @@
+{
+    "extends": "@ink-inputs/tsconfig/base.json",
+    "compilerOptions": {
+        "outDir": "lib",
+        "baseUrl": "./src"
+    }
+}

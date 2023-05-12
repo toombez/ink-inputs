@@ -1,0 +1,25 @@
+{
+  "name": "@ink-inputs/core",
+  "version": "0.0.0",
+  "license": "MIT",
+  "type": "module",
+  "scripts": {
+    "build": "tsup src/index.ts",
+    "dev": "yarn build --watch"
+  },
+  "dependencies": {
+    "figures": "^5.0.0",
+    "ink": "^4.1.0",
+    "meow": "^11.0.0",
+    "react": "^18.2.0"
+  },
+  "devDependencies": {
+    "@ink-inputs/tsconfig": "^0.0.0",
+    "@types/react": "^18.0.28",
+    "nodemon": "^2.0.22",
+    "tsup": "^6.7.0",
+    "typescript": "^5.0.2"
+  },
+  "main": "src/index.ts",
+  "types": "src/index.ts"
+}

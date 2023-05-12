@@ -1,0 +1,11 @@
+[34mCLI[39m Building entry: src/index.ts
+[34mCLI[39m Using tsconfig: tsconfig.json
+[34mCLI[39m tsup v6.7.0
+[34mCLI[39m Using tsup config: D:\programming\repositories\ink-inputs\packages\core\tsup.config.ts
+[34mCLI[39m Target: node16
+[34mESM[39m Build start
+[32mESM[39m [1mlib\index.js [22m[32m673.00 B[39m
+[32mESM[39m ⚡️ Build success in 25ms
+[34mDTS[39m Build start
+[32mDTS[39m ⚡️ Build success in 1020ms
+[32mDTS[39m [1mlib\index.d.ts [22m[32m1.03 KB[39m
