@@ -1,6 +1,6 @@
 import React from 'react'
-import { InkChildren, handler, useFocusOptions } from '../types.js'
-import { useButton } from '../hooks/useButton.js'
+import { InkChildren, handler, useFocusOptions } from '@types'
+import { useButton } from '@hooks'
 
 /**
  * Button render props

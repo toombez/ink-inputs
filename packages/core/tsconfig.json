@@ -2,7 +2,16 @@
     "extends": "@ink-inputs/tsconfig/base.json",
     "compilerOptions": {
         "outDir": "lib",
-        "baseUrl": "./src"
+        "baseUrl": "./src",
+        "paths": {
+            "@hooks/*": ["./hooks/*"],
+            "@hooks": ["./hooks/index.ts"],
+            "@components/*": ["./components/*"],
+            "@components": ["./components/index.ts"],
+            "@types": ["./types.ts"],
+            "@/*": ["./*"],
+            "@": ["./index.ts"]
+        }
     },
     "exclude": ["lib"]
 }
