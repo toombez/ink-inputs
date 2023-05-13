@@ -1,26 +1,14 @@
-#!/usr/bin/env node
 import React from 'react'
-import {render} from 'ink'
-import meow from 'meow'
-import App from './ui.js'
+import { render, Box, Text } from 'ink'
+import ButtonExample from '@examples/Button.js'
 
-const cli = meow(`
-    Usage
-      $ ink-inputs
+const App: React.FC = () => {
+    return (
+        <Box flexDirection='column' borderStyle='single'>
+            <Text>Lorem, ipsum.</Text>
+            <ButtonExample />
+        </Box>
+    )
+}
 
-    Options
-        --name  Your name
-
-    Examples
-      $ ink-inputs --name=Jane
-      Hello, Jane
-`, {
-    importMeta: import.meta,
-    flags: {
-        name: {
-            type: 'string'
-        }
-    }
-});
-
-render(<App name={cli.flags.name}/>)
+render(<App/>)
