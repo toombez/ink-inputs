@@ -8,4 +8,5 @@ export default defineConfig((options) => ({
     splitting: true,
     outDir: 'lib',
     minify: !options.watch,
+    clean: !options.watch,
 }))
