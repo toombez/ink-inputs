@@ -4,7 +4,7 @@
   "license": "MIT",
   "type": "module",
   "scripts": {
-    "build": "tsup src/index.tsx",
+    "build": "tsup src/index.tsx src/hooks/index.ts src/components/index.ts",
     "dev": "yarn run build --watch"
   },
   "dependencies": {
@@ -21,5 +21,22 @@
     "typescript": "^5.0.2"
   },
   "main": "lib/index.js",
-  "types": "lib/index.d.ts"
+  "files": [
+    "lib/"
+  ],
+  "exports": {
+    ".": {
+      "import": "./lib/index.js",
+      "types": "./lib/index.d.ts",
+      "default": "./lib/index.js"
+    },
+    "./hooks": {
+      "import": "./lib/hooks/index.js",
+      "types": "./lib/hooks/index.d.ts"
+    },
+    "./components": {
+      "import": "./lib/components/index.js",
+      "types": "./lib/components/index.d.ts"
+    }
+  }
 }
