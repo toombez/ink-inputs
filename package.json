@@ -7,7 +7,6 @@
     "apps/*"
   ],
   "scripts": {
-    "examples": "turbo run dev --filter @ink-inputs/examples",
     "build": "turbo run build",
     "dev": "turbo run dev --parallel"
   },
