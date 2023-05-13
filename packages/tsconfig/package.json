@@ -1,0 +1,11 @@
+{
+  "name": "@ink-inputs/tsconfig",
+  "version": "0.0.0",
+  "private": true,
+  "dependencies": {
+    "@sindresorhus/tsconfig": "^3.0.1"
+  },
+  "files": [
+    "base.json"
+  ]
+}

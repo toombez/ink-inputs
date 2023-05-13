@@ -1,0 +1,42 @@
+{
+  "name": "@ink-inputs/core",
+  "version": "0.0.0",
+  "license": "MIT",
+  "type": "module",
+  "scripts": {
+    "build": "tsup src/index.tsx src/hooks/index.ts src/components/index.ts",
+    "dev": "yarn run build --watch"
+  },
+  "dependencies": {
+    "figures": "^5.0.0",
+    "ink": "^4.1.0",
+    "meow": "^11.0.0",
+    "react": "^18.2.0"
+  },
+  "devDependencies": {
+    "@ink-inputs/tsconfig": "^0.0.0",
+    "@types/react": "^18.0.28",
+    "nodemon": "^2.0.22",
+    "tsup": "^6.7.0",
+    "typescript": "^5.0.2"
+  },
+  "main": "lib/index.js",
+  "files": [
+    "lib/"
+  ],
+  "exports": {
+    ".": {
+      "import": "./lib/index.js",
+      "types": "./lib/index.d.ts",
+      "default": "./lib/index.js"
+    },
+    "./hooks": {
+      "import": "./lib/hooks/index.js",
+      "types": "./lib/hooks/index.d.ts"
+    },
+    "./components": {
+      "import": "./lib/components/index.js",
+      "types": "./lib/components/index.d.ts"
+    }
+  }
+}

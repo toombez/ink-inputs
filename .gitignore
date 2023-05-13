@@ -10,5 +10,4 @@ node_modules
 .yarn/versions
 
 # dist
-lib
 dist

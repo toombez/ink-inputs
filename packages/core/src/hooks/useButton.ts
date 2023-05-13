@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
 import { useFocus, useInput } from 'ink'
-import { useFocusOptions } from '../types.js'
+import { useFocusOptions } from '@types'
 
 export interface UseButtonOptions {
     clickHandler?: () => void

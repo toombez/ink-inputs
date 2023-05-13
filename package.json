@@ -1,31 +1,21 @@
 {
   "name": "ink-inputs",
   "version": "0.0.0",
-  "license": "MIT",
-  "type": "module",
+  "private": true,
+  "workspaces": [
+    "packages/*",
+    "apps/*"
+  ],
   "scripts": {
-    "build": "tsc",
-    "dev": "nodemon --no-stdin -L --loader ts-node/esm ./src/cli.tsx"
+    "build": "turbo run build",
+    "dev": "turbo run dev --parallel",
+    "examples": "cd apps/examples && yarn run dev"
   },
-  "dependencies": {
-    "figures": "^5.0.0",
-    "ink": "^4.1.0",
-    "meow": "^11.0.0",
-    "react": "^18.2.0"
-  },
-  "devDependencies": {
-    "@sindresorhus/tsconfig": "^3.0.1",
-    "@types/react": "^18.0.28",
-    "nodemon": "^2.0.22",
-    "ts-node": "^10.9.1",
-    "typescript": "^5.0.2"
-  },
-  "packageManager": "yarn@3.4.1",
+  "packageManager": "yarn@4.0.0-rc.43",
   "engines": {
     "node": ">=16"
   },
-  "bin": "lib/cli.js",
-  "files": [
-    "dist/cli.js"
-  ]
+  "devDependencies": {
+    "turbo": "^1.9.4"
+  }
 }
