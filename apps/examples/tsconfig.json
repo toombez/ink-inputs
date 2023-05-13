@@ -1,7 +1,10 @@
 {
     "extends": "@ink-inputs/tsconfig/base.json",
     "compilerOptions": {
-        "baseUrl": "./src"
+        "baseUrl": "./src",
+        "paths": {
+            "@examples/*": ["./examples/*"]
+        }
     },
     "include": [
         "./src"
