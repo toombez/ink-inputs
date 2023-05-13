@@ -8,7 +8,8 @@
   ],
   "scripts": {
     "build": "turbo run build",
-    "dev": "turbo run dev --parallel"
+    "dev": "turbo run dev --parallel",
+    "examples": "cd apps/examples && yarn run dev"
   },
   "packageManager": "yarn@4.0.0-rc.43",
   "engines": {
