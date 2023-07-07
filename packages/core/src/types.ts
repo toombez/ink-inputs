@@ -44,4 +44,5 @@ export type InputCommonProps<
 > = {
     children?: InputChildren<T>
     render?: InputRender<T>
+    focusOptions?: useFocusOptions
 }

@@ -11,15 +11,23 @@ const Example: React.FC = () => {
 
     return (
         <Box flexDirection='column'>
-            <Text>Counts: {count}</Text>
+            <Text>
+                Counts: {count}
+            </Text>
+
+            <Button onClick={onClick} label='1. Fallback' />
 
             <Button onClick={onClick}>
-                <Text>1. just children</Text>
+                <Text>
+                    2. Children
+                </Text>
             </Button>
 
             <Button onClick={onClick}>
                 {({ isFocused }) => (
-                    <Text underline={isFocused}>2. render in children</Text>
+                    <Text underline={isFocused}>
+                        3. Children render
+                    </Text>
                 )}
             </Button>
 
@@ -31,7 +39,7 @@ const Example: React.FC = () => {
                         borderColor={isFocused ? 'cyan' : 'green'}
                     >
                         <Text>
-                            3. render function
+                            4. Render prop
                         </Text>
                     </Box>
                 )}
@@ -39,35 +47,18 @@ const Example: React.FC = () => {
 
             <Button
                 onClick={onClick}
-                render={({ isFocused, children }) => (
+                label='5. Label and render prop'
+                render={({ isFocused, label }) => (
                     <Box
                         borderStyle='round'
                         borderColor={isFocused ? 'red' : 'redBright'}
                     >
-                        {children}
+                        <Text>
+                            {label}
+                        </Text>
                     </Box>
                 )}
-            >
-                <Text>4. combine render function and children</Text>
-            </Button>
-
-            <Button
-                onClick={onClick}
-                render={({ isFocused, children }) => (
-                    <Box
-                        borderStyle='round'
-                        borderColor={isFocused ? 'white' : 'gray'}
-                    >
-                        {children}
-                    </Box>
-                )}
-            >
-                {({ isFocused }) => (
-                    <Text underline={isFocused}>
-                        5. combine render function and children render function
-                    </Text>
-                )}
-            </Button>
+            />
 
             <Box gap={1}>
                 <Button onClick={() => setCount(() => 0)}>
