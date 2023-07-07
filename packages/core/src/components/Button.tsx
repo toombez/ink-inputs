@@ -1,70 +1,65 @@
 import React from 'react'
-import { InkChildren, handler, useFocusOptions } from '@types'
+import { InkChildren, InputCommonProps, InputRenderCommonProps, handler, useFocusOptions } from '@types'
 import { useButton } from '@hooks'
+import { useRender } from '@hooks/useRender.js'
+import { Box, Text, useFocus } from 'ink'
 
 /**
  * Button render props
  */
-interface ButtonRenderProps {
-    isFocused?: boolean
-    children?: InkChildren
+type ButtonRenderProps = {
+    label: string
+} & InputRenderCommonProps
+
+const ButtonRenderFallback: React.FC<ButtonRenderProps> = ({
+    label,
+    isFocused,
+}) => {
+    return (
+        <Text underline={isFocused}>
+            {label}
+        </Text>
+    )
 }
-
-/**
- * Button render props omited children
- */
-type ButtonRenderPropsWithoutChildrent = Omit<ButtonRenderProps, 'children'>
-
-/**
- * Button render function
- */
-
-type ButtonRender = React.FC<ButtonRenderProps>
-/**
- * Button render function without children
- */
-type ButtonRenderWithoutChildren = React.FC<ButtonRenderPropsWithoutChildrent>
 
 /**
  * Button props
  */
-interface ButtonProps {
+type ButtonProps = {
     onClick?: handler
     onFocus?: handler
     onBlur?: handler
 
-    children?: ButtonRenderWithoutChildren | InkChildren
-    render?: ButtonRender
-    focusOptions?: useFocusOptions
-}
+    label?: string
+} & InputCommonProps<ButtonRenderProps>
 
 const Button: React.FC<ButtonProps> = ({
+    children,
+    render,
+    label = '',
     onBlur,
     onClick,
     onFocus,
-
-    children,
-    render = ({ children }) => <>{children}</>,
     focusOptions,
 }) => {
     const { isFocused } = useButton({
+        blurHandler: onBlur,
         clickHandler: onClick,
         focusHandler: onFocus,
-        blurHandler: onBlur,
-
         focusOptions,
     })
 
-    const _children = typeof children === 'function'
-        ? React.createElement(children, { isFocused })
-        : children
+    const { Render } = useRender({
+        children,
+        render,
+    }, ButtonRenderFallback)
 
-    const _render = React.createElement(render, {
-        isFocused,
-        children: _children
-    })
-
-    return _render
+    return (
+        <Render
+            isFocused={isFocused}
+            label={label}
+        />
+    )
 }
 
 export default Button
