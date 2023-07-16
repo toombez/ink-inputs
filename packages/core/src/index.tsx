@@ -1,5 +1,5 @@
-export { Button, Select } from '@components'
-export { useButton, useSelect, useRender } from '@hooks'
+export { Button, Select, Input } from '@components'
+export { useButton, useSelect, useInput, useRender } from '@hooks'
 
 export {
     InkChildren,
@@ -14,4 +14,7 @@ export {
     SelectOption,
     SelectProps,
     SelectRenderProps,
+
+    InputProps,
+    InputRenderProps,
 } from '@types'

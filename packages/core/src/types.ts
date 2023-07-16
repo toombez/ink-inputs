@@ -180,3 +180,16 @@ export type SelectProps<T> = {
      */
     onFocus?: Handler
 } & InputCommonProps<SelectRenderProps<T>>
+
+export type InputRenderProps = {
+    value: string
+    input: (input: string) => void
+} & InputRenderCommonProps
+
+export type InputProps = {
+    /**
+     * On input handler
+     * @param input new value
+     */
+    onInput?: (input: string) => void
+} & InputCommonProps<InputRenderProps>
