@@ -193,3 +193,20 @@ export type InputProps = {
      */
     onInput?: (input: string) => void
 } & InputCommonProps<InputRenderProps>
+
+export type RadioOption<T> = {
+    value: T
+    label: string
+}
+
+export type RadioRenderProps<T> = {
+    options: RadioOption<T>[]
+    selected: T
+    selectedIndex: number
+    select: (delta: number) => void
+} & InputRenderCommonProps
+
+export type RadioProps<T> = {
+    options: RadioOption<T>[]
+    onChange?: (value: T) => void
+} & InputCommonProps<RadioRenderProps<T>>
