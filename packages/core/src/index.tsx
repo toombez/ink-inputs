@@ -1,7 +1,20 @@
 import { Button } from '@components'
-import { useButton } from '@hooks'
+import { useButton, useRender } from '@hooks'
 
 export {
     Button,
-    useButton
+
+    useButton,
+    useRender,
 }
+
+export {
+    InkChildren,
+    InputChildren,
+
+    InputCommonProps,
+    InputRenderCommonProps,
+
+    ButtonProps,
+    ButtonRenderProps,
+} from '@types'

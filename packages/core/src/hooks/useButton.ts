@@ -1,41 +1,33 @@
-import { useEffect } from 'react'
+import React from 'react'
 import { useFocus, useInput } from 'ink'
-import { useFocusOptions } from '@types'
+import { ButtonProps, ButtonRenderProps } from '@types'
 
-export interface UseButtonOptions {
-    clickHandler?: () => void
-    focusHandler?: () => void
-    blurHandler?: () => void
-
-    focusOptions?: useFocusOptions
-}
-
-export const useButton = ({
-    blurHandler,
-    clickHandler,
-    focusHandler,
+const useButton = ({
+    onClick = () => {},
+    onBlur = () => {},
+    onFocus = () => {},
 
     focusOptions,
-}: UseButtonOptions) => {
+    label = '',
+}: ButtonProps): ButtonRenderProps => {
     const { isFocused, focus } = useFocus(focusOptions)
 
-    useEffect(() => {
-        const handler = isFocused ? focusHandler : blurHandler
-
-        handler?.()
-    }, [isFocused])
+    React.useCallback(isFocused ? onFocus : onBlur, [isFocused])
 
     useInput((input, key) => {
-        const isEnterPressed = key.return
-        const isSpacePressed = input === ' '
+        const isEnter = key.return
+        const isSpace = input === ' '
 
-        if (isEnterPressed || isSpacePressed) {
-            clickHandler?.()
+        if (isEnter || isSpace) {
+            onClick?.()
         }
     }, { isActive: isFocused })
 
     return {
         isFocused,
-        focus,
+        label,
     }
 }
+
+export { useButton }
+export default useButton

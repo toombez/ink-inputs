@@ -1,11 +1,12 @@
 import React from 'react'
 import { InputCommonProps, InputRender, InputRenderCommonProps } from '@types'
-import RenderInkChildren from '@components/RenderInkChildren.js'
 
 export const useRender = <T extends InputRenderCommonProps>(
     props: InputCommonProps<T>,
     fallback: InputRender<T>,
-) => {
+): {
+    Render: InputRender<T>
+} => {
     const { children, render } = props
 
     const Render = React.useMemo<InputRender<T>>(() => {
@@ -22,7 +23,7 @@ export const useRender = <T extends InputRenderCommonProps>(
         }
 
         if (hasChildren && !isChildrenRender) {
-            return RenderInkChildren.bind(this, { children })
+            return () => React.Fragment({ children })
         }
 
         return fallback
