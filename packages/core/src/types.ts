@@ -79,6 +79,10 @@ export type ButtonRenderProps = {
      * Button label
      */
     label: string
+    /**
+     * Click emitter
+     */
+    click: () => void
 } & InputRenderCommonProps
 
 /**

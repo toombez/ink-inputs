@@ -12,6 +12,10 @@ const useButton = ({
 }: ButtonProps): ButtonRenderProps => {
     const { isFocused, focus } = useFocus(focusOptions)
 
+    function click() {
+        onClick?.()
+    }
+
     React.useCallback(isFocused ? onFocus : onBlur, [isFocused])
 
     useInput((input, key) => {
@@ -19,13 +23,15 @@ const useButton = ({
         const isSpace = input === ' '
 
         if (isEnter || isSpace) {
-            onClick?.()
+            click()
         }
     }, { isActive: isFocused })
 
     return {
         isFocused,
         label,
+
+        click,
     }
 }
 
