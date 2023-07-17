@@ -21,4 +21,8 @@ export {
     RadioOption,
     RadioProps,
     RadioRenderProps,
+
+    CheckBoxOption,
+    CheckBoxProps,
+    CheckBoxRenderProps,
 } from '@types'

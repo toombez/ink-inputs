@@ -210,3 +210,23 @@ export type RadioProps<T> = {
     options: RadioOption<T>[]
     onChange?: (value: T) => void
 } & InputCommonProps<RadioRenderProps<T>>
+
+export type CheckBoxOption<T> = {
+    label: string
+    value: T
+}
+
+export type CheckBoxRenderProps<T> = {
+    options: CheckBoxOption<T>[]
+    selected: T[]
+    selectedIndexes: number[]
+    cursorIndex: number
+
+    select: (index: number) => void
+    unselect: (element: T) => void
+} & InputRenderCommonProps
+
+export type CheckBoxProps<T> = {
+    options: CheckBoxOption<T>[]
+    onSelect?: (selected: T[]) => void
+} & InputCommonProps<CheckBoxRenderProps<T>>
