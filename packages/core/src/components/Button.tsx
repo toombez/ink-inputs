@@ -1,20 +1,12 @@
 import React from 'react'
-import { InkChildren, InputCommonProps, InputRenderCommonProps, handler, useFocusOptions } from '@types'
-import { useButton } from '@hooks'
-import { useRender } from '@hooks/useRender.js'
-import { Box, Text, useFocus } from 'ink'
+import { Text } from 'ink'
+import { useButton, useRender } from '@hooks'
+import { ButtonProps, ButtonRenderProps, InkChildren } from '@types'
 
-/**
- * Button render props
- */
-type ButtonRenderProps = {
-    label: string
-} & InputRenderCommonProps
-
-const ButtonRenderFallback: React.FC<ButtonRenderProps> = ({
+function ButtonRenderFallback({
     label,
     isFocused,
-}) => {
+}: ButtonRenderProps): InkChildren {
     return (
         <Text underline={isFocused}>
             {label}
@@ -22,44 +14,12 @@ const ButtonRenderFallback: React.FC<ButtonRenderProps> = ({
     )
 }
 
-/**
- * Button props
- */
-type ButtonProps = {
-    onClick?: handler
-    onFocus?: handler
-    onBlur?: handler
+function Button(props: ButtonProps): InkChildren {
+    const renderProps = useButton(props)
 
-    label?: string
-} & InputCommonProps<ButtonRenderProps>
+    const { Render } = useRender(props, ButtonRenderFallback)
 
-const Button: React.FC<ButtonProps> = ({
-    children,
-    render,
-    label = '',
-    onBlur,
-    onClick,
-    onFocus,
-    focusOptions,
-}) => {
-    const { isFocused } = useButton({
-        blurHandler: onBlur,
-        clickHandler: onClick,
-        focusHandler: onFocus,
-        focusOptions,
-    })
-
-    const { Render } = useRender({
-        children,
-        render,
-    }, ButtonRenderFallback)
-
-    return (
-        <Render
-            isFocused={isFocused}
-            label={label}
-        />
-    )
+    return <Render {...renderProps} />
 }
 
 export default Button
