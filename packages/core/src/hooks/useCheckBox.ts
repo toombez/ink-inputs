@@ -1,7 +1,7 @@
 import React from 'react'
 import { CheckBoxProps, CheckBoxRenderProps } from '@types';
 import { useFocus, useInput } from 'ink';
-import { clamp } from '@/utils.js';
+import { useCursor } from './useCursor.js';
 
 function useCheckBox<T>({
     options,
@@ -16,9 +16,10 @@ function useCheckBox<T>({
     const selected = selectedIndexes
         .map((optionIndex) => options.at(optionIndex)!.value)
 
-    const [cursorIndex, setCursorIndex] = React.useState<number>(0)
-    const isCursorIndexSelected = selectedIndexes.includes(cursorIndex)
-
+    const { position, next, previous } = useCursor({
+        maxPosition: options.length
+    })
+    const isCursorIndexSelected = selectedIndexes.includes(position)
 
     function select(index: number) {
         setSelectedIndexes((indexes) => {
@@ -50,23 +51,19 @@ function useCheckBox<T>({
         const isRightArrow = key.rightArrow
 
         if (isDownArrow || isRightArrow) {
-            setCursorIndex((currentIndex) => {
-                return clamp(currentIndex + 1, options.length - 1, 0)
-            })
+            next()
         }
 
         if (isUpArrow || isLeftArrow) {
-            setCursorIndex((currentIndex) => {
-                return clamp(currentIndex - 1, options.length - 1, 0)
-            })
+            previous()
         }
 
         if (isEnter && isCursorIndexSelected) {
-            unselect(options.at(cursorIndex)!.value)
+            unselect(options.at(position)!.value)
         }
 
         if (isEnter && !isCursorIndexSelected) {
-            select(cursorIndex)
+            select(position)
         }
     }, { isActive: isFocused })
 
@@ -75,7 +72,7 @@ function useCheckBox<T>({
         selectedIndexes,
         isFocused,
         options,
-        cursorIndex,
+        cursorIndex: position,
 
         select,
         unselect,
