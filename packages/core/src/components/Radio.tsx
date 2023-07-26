@@ -7,12 +7,13 @@ import figureSet from 'figures'
 
 function RadioRenderFallback<T>({
     selectedIndex,
+    cursorIndex,
     options,
 }: RadioRenderProps<T>): InkChildren {
     return (
         <Box flexDirection='column'>
             {options.map((option, index) => (
-                <Text key={index}>
+                <Text key={index} underline={index === cursorIndex}>
                     {index === selectedIndex ? figureSet.radioOn : figureSet.radioOff}
                     {' '}
                     {option.label}

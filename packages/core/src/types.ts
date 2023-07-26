@@ -203,6 +203,7 @@ export type RadioRenderProps<T> = {
     options: RadioOption<T>[]
     selected: T
     selectedIndex: number
+    cursorIndex: number
     select: (delta: number) => void
 } & InputRenderCommonProps
 
