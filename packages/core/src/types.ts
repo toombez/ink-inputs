@@ -151,6 +151,8 @@ export type SelectRenderProps<T> = {
      * @param delta new option index delta
      */
     select: (delta: number) => void
+
+    cursorIndex: number
 } & InputRenderCommonProps
 
 /**

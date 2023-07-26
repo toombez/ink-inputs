@@ -2,6 +2,7 @@ import React from 'react'
 import { useFocus, useInput } from 'ink'
 import { clamp } from '@/utils.js'
 import { SelectProps, SelectRenderProps, UseFocusOptions } from '@types'
+import { useCursor } from './useCursor.js'
 
 function useSelect<T>({
     focusOptions,
@@ -15,6 +16,11 @@ function useSelect<T>({
     const minSelectedIndex = 0
     const maxSelectedIndex = options.length - 1
 
+    const {
+        next,
+        previous,
+        position,
+    } = useCursor({ maxPosition: options.length })
     const [selectedIndex, setSelectedIndex] = React.useState<number>(0)
     const [isOpened, setIsOpened] = React.useState(false)
 
@@ -30,10 +36,8 @@ function useSelect<T>({
         setIsOpened(() => false)
     }
 
-    function select(delta: number) {
-        setSelectedIndex((index) => {
-            return clamp(index + delta, maxSelectedIndex, minSelectedIndex)
-        })
+    function select(optionIndex: number) {
+        setSelectedIndex(() => optionIndex)
     }
 
     useInput((input, key) => {
@@ -45,20 +49,24 @@ function useSelect<T>({
         const isSpace = input === ' '
         const isEsc = key.escape
 
-        if (isDownArrow || isRightArrow) {
-            return select(1)
+        if ((isDownArrow || isRightArrow) && isOpened) {
+            next()
         }
 
-        if (isUpArrow || isLeftArrow) {
-            return select(-1)
+        if ((isUpArrow || isLeftArrow) && isOpened) {
+            previous()
         }
 
         if (!isOpened && (isEnter || isSpace)) {
             return open()
         }
 
-        if (isEsc || (isOpened && (isEnter || isSpace))) {
+        if (isEsc && isOpened) {
             return close()
+        }
+
+        if (isEnter && isOpened) {
+            return select(position)
         }
     }, { isActive: isFocused })
 
@@ -72,6 +80,7 @@ function useSelect<T>({
         selected,
         options,
         showCount,
+        cursorIndex: position,
 
         select,
         open,
