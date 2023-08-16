@@ -1,6 +1,7 @@
 import React from 'react'
 import { Box, Text } from 'ink'
 import { InkChildren, useInput, InputProps, InputRenderProps, useRender } from '@ink-inputs/core'
+import Composer from './Composer.js'
 
 function InputRenderFallback({
     value,
@@ -22,12 +23,9 @@ function InputRenderFallback({
     )
 }
 
-function Input(props: InputProps): InkChildren {
-    const renderProps = useInput(props)
-
-    const { Render } = useRender(props, InputRenderFallback)
-
-    return <Render {...renderProps} />
-}
+const Input = Composer({
+    fallback: InputRenderFallback,
+    hook: useInput,
+})
 
 export default Input

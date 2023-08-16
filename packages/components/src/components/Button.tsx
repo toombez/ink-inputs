@@ -2,6 +2,7 @@ import React from 'react'
 import { Text } from 'ink'
 import { useButton, useRender } from '@ink-inputs/core'
 import { ButtonRenderProps, InkChildren, ButtonProps } from '@ink-inputs/core'
+import Composer from './Composer.js'
 
 function ButtonRenderFallback({
     label,
@@ -14,12 +15,9 @@ function ButtonRenderFallback({
     )
 }
 
-function Button(props: ButtonProps): InkChildren {
-    const renderProps = useButton(props)
-
-    const { Render } = useRender(props, ButtonRenderFallback)
-
-    return <Render {...renderProps} />
-}
+const Button = Composer({
+    fallback: ButtonRenderFallback,
+    hook: useButton
+})
 
 export default Button

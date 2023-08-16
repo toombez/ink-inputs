@@ -2,6 +2,7 @@ import React from 'react'
 import { Box, Text } from 'ink';
 import figureSet from 'figures';
 import { CheckBoxProps, CheckBoxRenderProps, InkChildren, useCheckBox, useRender } from '@ink-inputs/core';
+import Composer from './Composer.js';
 
 function CheckBoxRenderFallback<T>({
     options,
@@ -24,12 +25,13 @@ function CheckBoxRenderFallback<T>({
     )
 }
 
-function CheckBox<T>(props: CheckBoxProps<T>) {
-    const renderProps = useCheckBox(props)
+const CheckBox = <T, >(props: CheckBoxProps<T>): InkChildren => {
+    const Composition = Composer({
+        fallback: CheckBoxRenderFallback,
+        hook: useCheckBox<T>,
+    })
 
-    const { Render } = useRender(props, CheckBoxRenderFallback<T>)
-
-    return <Render {...renderProps} />
+    return <Composition {...props} />
 }
 
 export default CheckBox

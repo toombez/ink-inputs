@@ -2,6 +2,7 @@ import React from 'react'
 import { Box, Text } from 'ink'
 import figureSet from 'figures'
 import { InkChildren, RadioProps, RadioRenderProps, useRadio, useRender } from '@ink-inputs/core'
+import Composer from './Composer.js'
 
 function RadioRenderFallback<T>({
     selectedIndex,
@@ -21,12 +22,13 @@ function RadioRenderFallback<T>({
     )
 }
 
-function Radio<T>(props: RadioProps<T>): InkChildren {
-    const renderProps = useRadio(props)
+const Radio = <T, >(props: RadioProps<T>): InkChildren => {
+    const Composition = Composer({
+        fallback: RadioRenderFallback,
+        hook: useRadio<T>,
+    })
 
-    const { Render } = useRender(props, RadioRenderFallback)
-
-    return <Render {...renderProps} />
+    return <Composition {...props} />
 }
 
 export default Radio
