@@ -6,8 +6,6 @@
         "paths": {
             "@hooks/*": ["./hooks/*"],
             "@hooks": ["./hooks/index.ts"],
-            "@components/*": ["./components/*"],
-            "@components": ["./components/index.ts"],
             "@types": ["./types.ts"],
             "@/*": ["./*"],
             "@": ["./index.ts"]

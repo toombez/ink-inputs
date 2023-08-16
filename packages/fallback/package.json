@@ -1,16 +1,19 @@
 {
     "name": "@ink-inputs/fallback",
     "version": "0.0.0",
+    "type": "module",
     "scripts": {
       "build": "tsup src/index.ts",
       "dev": "yarn run build --watch"
     },
     "dependencies": {
       "ink": "^4.1.0",
+      "figures": "^5.0.0",
       "react": "^18.2.0"
     },
     "devDependencies": {
       "@ink-inputs/tsconfig": "^0.0.0",
+      "@ink-inputs/core": "^0.0.0",
       "@types/react": "^18.0.28",
       "tsup": "^6.7.0",
       "typescript": "^5.0.2"
