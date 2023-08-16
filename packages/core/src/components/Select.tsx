@@ -9,7 +9,7 @@ function SelectRenderFallback<T>({
     isOpened,
     options,
     selectedIndex,
-    showCount,
+    cursorIndex,
 }: SelectRenderProps<T>): InkChildren {
     const selected = options.at(selectedIndex)!.label
 
@@ -30,10 +30,11 @@ function SelectRenderFallback<T>({
             >
                 {options.map((option, index) => (
                     <Text
-                    key={index}
-                    underline={selectedIndex === index}
+                        key={index}
+                        underline={selectedIndex === index}
+                        backgroundColor={cursorIndex === index ? 'gray' : 'black'}
                     >
-                        {option.label}
+                        {index}|{cursorIndex}{option.label}
                     </Text>
                 ))}
             </Box>

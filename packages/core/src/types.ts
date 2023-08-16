@@ -151,6 +151,8 @@ export type SelectRenderProps<T> = {
      * @param delta new option index delta
      */
     select: (delta: number) => void
+
+    cursorIndex: number
 } & InputRenderCommonProps
 
 /**
@@ -183,6 +185,7 @@ export type SelectProps<T> = {
 
 export type InputRenderProps = {
     value: string
+    cursorPosition: number
     input: (input: string) => void
 } & InputRenderCommonProps
 
@@ -203,6 +206,7 @@ export type RadioRenderProps<T> = {
     options: RadioOption<T>[]
     selected: T
     selectedIndex: number
+    cursorIndex: number
     select: (delta: number) => void
 } & InputRenderCommonProps
 
@@ -230,3 +234,16 @@ export type CheckBoxProps<T> = {
     options: CheckBoxOption<T>[]
     onSelect?: (selected: T[]) => void
 } & InputCommonProps<CheckBoxRenderProps<T>>
+
+export type UseCursorOptions = {
+    isRepeating?: boolean
+    minPosition?: number
+    maxPosition: number
+}
+
+export type UseCursorResult = {
+    position: number
+    move: (offset: number) => void
+    next: () => void
+    previous: () => void
+}
