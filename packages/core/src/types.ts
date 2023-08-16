@@ -185,6 +185,7 @@ export type SelectProps<T> = {
 
 export type InputRenderProps = {
     value: string
+    cursorPosition: number
     input: (input: string) => void
 } & InputRenderCommonProps
 
