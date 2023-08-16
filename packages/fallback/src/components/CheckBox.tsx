@@ -1,9 +1,7 @@
 import React from 'react'
-import { CheckBoxProps, CheckBoxRenderProps, InkChildren } from '@types';
 import { Box, Text } from 'ink';
 import figureSet from 'figures';
-import { useCheckBox } from '@hooks/useCheckBox.js';
-import { useRender } from '@hooks/useRender.js';
+import { CheckBoxProps, CheckBoxRenderProps, InkChildren, useCheckBox, useRender } from '@ink-inputs/core';
 
 function CheckBoxRenderFallback<T>({
     options,

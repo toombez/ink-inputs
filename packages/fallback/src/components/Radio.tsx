@@ -1,9 +1,7 @@
 import React from 'react'
-import { InkChildren, RadioProps, RadioRenderProps } from '@types'
-import { useRadio } from '@hooks/useRadio.js'
-import { useRender } from '@hooks/useRender.js'
 import { Box, Text } from 'ink'
 import figureSet from 'figures'
+import { InkChildren, RadioProps, RadioRenderProps, useRadio, useRender } from '@ink-inputs/core'
 
 function RadioRenderFallback<T>({
     selectedIndex,
