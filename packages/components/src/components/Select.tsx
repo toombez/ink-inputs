@@ -1,6 +1,7 @@
 import React from 'react'
 import { Box, Text } from 'ink'
 import { InkChildren, SelectProps, SelectRenderProps, useRender, useSelect } from '@ink-inputs/core'
+import Composer from './Composer.js'
 
 function SelectRenderFallback<T>({
     isFocused,
@@ -41,11 +42,12 @@ function SelectRenderFallback<T>({
 }
 
 const Select = <T, >(props: SelectProps<T>): InkChildren => {
-    const renderProps = useSelect(props)
+    const Composition = Composer({
+        fallback: SelectRenderFallback,
+        hook: useSelect<T>,
+    })
 
-    const { Render } = useRender(props, SelectRenderFallback<T>)
-
-    return <Render {...renderProps} />
+    return <Composition {...props} />
 }
 
 export default Select
