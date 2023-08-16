@@ -12,6 +12,7 @@
   },
   "devDependencies": {
     "@ink-inputs/core": "^0.0.0",
+    "@ink-inputs/components": "^0.0.0",
     "@ink-inputs/tsconfig": "^0.0.0",
     "@types/react": "^18.0.28",
     "tsup": "^6.7.0",

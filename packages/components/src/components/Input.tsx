@@ -1,8 +1,6 @@
 import React from 'react'
-import { InkChildren, InputProps, InputRenderProps } from '@types'
-import { useInput } from '@hooks/useInput.js'
-import { useRender } from '@hooks/useRender.js'
-import { Box, Newline, Text } from 'ink'
+import { Box, Text } from 'ink'
+import { InkChildren, useInput, InputProps, InputRenderProps, useRender } from '@ink-inputs/core'
 
 function InputRenderFallback({
     value,

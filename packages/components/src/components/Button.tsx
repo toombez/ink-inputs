@@ -1,7 +1,7 @@
 import React from 'react'
 import { Text } from 'ink'
-import { useButton, useRender } from '@hooks'
-import { ButtonProps, ButtonRenderProps, InkChildren } from '@types'
+import { useButton, useRender } from '@ink-inputs/core'
+import { ButtonRenderProps, InkChildren, ButtonProps } from '@ink-inputs/core'
 
 function ButtonRenderFallback({
     label,

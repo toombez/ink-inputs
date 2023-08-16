@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Button } from '@ink-inputs/core/components'
+import { Button } from '@ink-inputs/components'
 import { Box, Text } from 'ink'
 
 const Example: React.FC = () => {

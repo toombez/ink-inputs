@@ -4,8 +4,6 @@
         "outDir": "lib",
         "baseUrl": "./src",
         "paths": {
-            "@hooks/*": ["./hooks/*"],
-            "@hooks": ["./hooks/index.ts"],
             "@types": ["./types.ts"],
             "@/*": ["./*"],
             "@": ["./index.ts"]

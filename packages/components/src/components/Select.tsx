@@ -1,8 +1,6 @@
 import React from 'react'
 import { Box, Text } from 'ink'
-import { useRender } from '@hooks/useRender.js'
-import { useSelect } from '@hooks/useSelect.js'
-import { InkChildren, SelectProps, SelectRenderProps } from '@types'
+import { InkChildren, SelectProps, SelectRenderProps, useRender, useSelect } from '@ink-inputs/core'
 
 function SelectRenderFallback<T>({
     isFocused,
