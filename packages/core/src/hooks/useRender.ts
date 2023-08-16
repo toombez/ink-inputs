@@ -1,5 +1,11 @@
 import React from 'react'
-import { InputCommonProps, InputRender, InputRenderCommonProps } from '@types'
+import { InputCommonProps, InputRender, InputRenderCommonProps, InkChildren } from '@types'
+
+type IRenderChildrenProps = {
+    children: InkChildren
+}
+
+const RenderChildren = ({ children }: IRenderChildrenProps) => children
 
 export const useRender = <T extends InputRenderCommonProps>(
     props: InputCommonProps<T>,
@@ -23,7 +29,7 @@ export const useRender = <T extends InputRenderCommonProps>(
         }
 
         if (hasChildren && !isChildrenRender) {
-            return () => React.Fragment({ children })
+            return RenderChildren.bind(this, { children })
         }
 
         return fallback
