@@ -1,20 +1,20 @@
 import React, { useEffect, useRef } from 'react'
-import { InputProps, InputRenderProps } from '@types'
+import { TextInputProps, TextInputRenderProps } from '@types'
 import { useFocus, useInput as useKeyboardInput } from 'ink'
 import { useCursor } from './useCursor.js'
 
-type InputCursorOperations = 'ADD' | 'REMOVE'
+type TextInputCursorOperations = 'ADD' | 'REMOVE'
 
-export function useInput({
+export function useTextInput({
     focusOptions,
     onBlur = () => {},
     onFocus = () => {},
     onInput,
-}: InputProps): InputRenderProps {
+}: TextInputProps): TextInputRenderProps {
     const { focus, isFocused } = useFocus(focusOptions)
 
     const [value, setValue] = React.useState<string>('')
-    const previousOperation = useRef<InputCursorOperations | null>(null)
+    const previousOperation = useRef<TextInputCursorOperations | null>(null)
 
     const {
         move,
