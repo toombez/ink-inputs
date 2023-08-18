@@ -1,13 +1,13 @@
 import React from 'react'
 import { Box, Text } from 'ink'
-import { InkChildren, useInput, InputProps, InputRenderProps, useRender } from '@ink-inputs/core'
+import { InkChildren, useTextInput, TextInputProps, TextInputRenderProps, useRender } from '@ink-inputs/core'
 import Composer from './Composer.js'
 
-function InputRenderFallback({
+function TextInputRenderFallback({
     value,
     isFocused,
     cursorPosition,
-}: InputRenderProps): InkChildren {
+}: TextInputRenderProps): InkChildren {
     return (
         <Box minHeight={1}>
             <Text
@@ -24,8 +24,8 @@ function InputRenderFallback({
 }
 
 const Input = Composer({
-    fallback: InputRenderFallback,
-    hook: useInput,
+    fallback: TextInputRenderFallback,
+    hook: useTextInput,
 })
 
 export default Input
