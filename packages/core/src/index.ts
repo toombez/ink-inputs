@@ -14,8 +14,8 @@ export {
     SelectProps,
     SelectRenderProps,
 
-    InputProps,
-    InputRenderProps,
+    TextInputProps,
+    TextInputRenderProps,
 
     RadioOption,
     RadioProps,

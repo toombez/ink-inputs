@@ -183,19 +183,19 @@ export type SelectProps<T> = {
     onFocus?: Handler
 } & InputCommonProps<SelectRenderProps<T>>
 
-export type InputRenderProps = {
+export type TextInputRenderProps = {
     value: string
     cursorPosition: number
     input: (input: string) => void
 } & InputRenderCommonProps
 
-export type InputProps = {
+export type TextInputProps = {
     /**
      * On input handler
      * @param input new value
      */
     onInput?: (input: string) => void
-} & InputCommonProps<InputRenderProps>
+} & InputCommonProps<TextInputRenderProps>
 
 export type RadioOption<T> = {
     value: T
