@@ -1,5 +1,5 @@
 import React from 'react'
-import { InputCommonProps, InputRender, InputRenderCommonProps, InkChildren } from '@types'
+import { BaseInputProps, InputRender, BaseRenderProps, InkChildren } from '@types'
 
 type IRenderChildrenProps = {
     children: InkChildren
@@ -7,8 +7,8 @@ type IRenderChildrenProps = {
 
 const RenderChildren = ({ children }: IRenderChildrenProps) => children
 
-export const useRender = <T extends InputRenderCommonProps>(
-    props: InputCommonProps<T>,
+export const useRender = <T extends BaseRenderProps>(
+    props: BaseInputProps<T>,
     fallback: InputRender<T>,
 ): {
     Render: InputRender<T>
