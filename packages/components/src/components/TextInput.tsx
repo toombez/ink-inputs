@@ -1,6 +1,6 @@
 import React from 'react'
 import { Box, Text } from 'ink'
-import { InkChildren, useTextInput, TextInputProps, TextInputRenderProps, useRender } from '@ink-inputs/core'
+import { InkChildren, useTextInput, TextInputProps, TextInputRenderProps, useRender, useSelect } from '@ink-inputs/core'
 import Composer from './Composer.js'
 
 function TextInputRenderFallback({
@@ -23,9 +23,9 @@ function TextInputRenderFallback({
     )
 }
 
-const Input = Composer({
+const TextInput: React.FC<TextInputProps> = Composer({
     fallback: TextInputRenderFallback,
     hook: useTextInput,
 })
 
-export default Input
+export default TextInput
