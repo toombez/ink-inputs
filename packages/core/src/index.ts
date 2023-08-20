@@ -4,8 +4,8 @@ export {
     InkChildren,
     InputChildren,
 
-    InputCommonProps,
-    InputRenderCommonProps,
+    BaseInputProps,
+    BaseRenderProps,
 
     ButtonProps,
     ButtonRenderProps,
