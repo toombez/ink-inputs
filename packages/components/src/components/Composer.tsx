@@ -1,10 +1,10 @@
-import { InkChildren, InputCommonProps, InputRenderCommonProps, useRender } from '@ink-inputs/core'
+import { InkChildren, BaseInputProps, BaseRenderProps, useRender } from '@ink-inputs/core'
 import { IComposerProps } from '@types'
 import React from 'react'
 
 export default function Composer<
-    T extends InputCommonProps<K>,
-    K extends InputRenderCommonProps
+    T extends BaseInputProps<K>,
+    K extends BaseRenderProps
 >({
     fallback,
     hook,
