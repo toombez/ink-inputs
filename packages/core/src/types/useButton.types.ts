@@ -1,23 +1,6 @@
-import { Handler, BaseInputProps, BaseRenderProps } from "./global.types.js"
+import { Handler, PropsBuilder } from "./global.types.js"
 
-/**
- * Button render props
- */
-export type ButtonRenderProps = {
-    /**
-     * Button label
-     */
-    label: string
-    /**
-     * Click emitter
-     */
-    click: () => void
-} & BaseRenderProps
-
-/**
- * Button props
- */
-export type ButtonProps = {
+type ButtonTypes = PropsBuilder<{
     /**
      * Click handler
      */
@@ -27,4 +10,16 @@ export type ButtonProps = {
      * Button label
      */
     label?: string
-} & BaseInputProps<ButtonRenderProps>
+}, {
+    /**
+     * Button label
+     */
+    label: string
+    /**
+     * Click emitter
+     */
+    click: () => void
+}>
+
+export type ButtonProps = ButtonTypes['inputProps']
+export type ButtonRenderProps = ButtonTypes['renderProps']
