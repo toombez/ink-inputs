@@ -1,11 +1,14 @@
-import { BaseInputProps, BaseRenderProps } from "./global.types.js"
+import { PropsBuilder } from "./global.types.js"
 
 export type CheckBoxOption<T> = {
     label: string
     value: T
 }
 
-export type CheckBoxRenderProps<T> = {
+type CheckBoxTypes<T> = PropsBuilder<{
+    options: CheckBoxOption<T>[]
+    onSelect?: (selected: T[]) => void
+}, {
     options: CheckBoxOption<T>[]
     selected: T[]
     selectedIndexes: number[]
@@ -13,9 +16,7 @@ export type CheckBoxRenderProps<T> = {
 
     select: (index: number) => void
     unselect: (element: T) => void
-} & BaseRenderProps
+}>
 
-export type CheckBoxProps<T> = {
-    options: CheckBoxOption<T>[]
-    onSelect?: (selected: T[]) => void
-} & BaseInputProps<CheckBoxRenderProps<T>>
+export type CheckBoxProps<T> = CheckBoxTypes<T>['inputProps']
+export type CheckBoxRenderProps<T> = CheckBoxTypes<T>['renderProps']

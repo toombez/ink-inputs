@@ -1,23 +1,29 @@
-import { Handler, BaseInputProps, BaseRenderProps } from "./global.types.js"
+import { Handler, PropsBuilder } from "./global.types.js"
 
-/**
- * Select option
- */
-export interface SelectOption<T> {
+type SelectTypes<T> = PropsBuilder<{
     /**
-     * Option value
+     * Select options
      */
-    value: T
+    options: SelectOption<T>[]
     /**
-     * Option label
+     * Count options to show
      */
-    label: string
-}
-
-/**
- * Select render props
- */
-export type SelectRenderProps<T> = {
+    showCount?: number
+    /**
+     * On select handler
+     * @param value selected option value
+     * @returns void
+     */
+    onSelect?: (value: T) => void
+    /**
+     * On blur handler
+     */
+    onBlur?: Handler
+    /**
+     * On focus handler
+     */
+    onFocus?: Handler
+}, {
     /**
      * Is opened select
      */
@@ -53,32 +59,28 @@ export type SelectRenderProps<T> = {
     select: (delta: number) => void
 
     cursorIndex: number
-} & BaseRenderProps
+}>
+
+/**
+ * Select option
+ */
+export interface SelectOption<T> {
+    /**
+     * Option value
+     */
+    value: T
+    /**
+     * Option label
+     */
+    label: string
+}
+
+/**
+ * Select render props
+ */
+export type SelectRenderProps<T> = SelectTypes<T>['renderProps']
 
 /**
  * Select props
  */
-export type SelectProps<T> = {
-    /**
-     * Select options
-     */
-    options: SelectOption<T>[]
-    /**
-     * Count options to show
-     */
-    showCount?: number
-    /**
-     * On select handler
-     * @param value selected option value
-     * @returns void
-     */
-    onSelect?: (value: T) => void
-    /**
-     * On blur handler
-     */
-    onBlur?: Handler
-    /**
-     * On focus handler
-     */
-    onFocus?: Handler
-} & BaseInputProps<SelectRenderProps<T>>
+export type SelectProps<T> =  SelectTypes<T>['inputProps']

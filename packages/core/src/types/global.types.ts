@@ -82,3 +82,17 @@ export type BaseInputProps<
      */
     onBlur?: Handler
 }
+
+export type PropsBuilder<
+    /**
+     * Input props
+     */
+    T extends Object = {},
+    /**
+     * Render props
+     */
+    K extends Object = {},
+> = {
+    inputProps: T & BaseInputProps<K & BaseRenderProps>
+    renderProps: K & BaseRenderProps
+}

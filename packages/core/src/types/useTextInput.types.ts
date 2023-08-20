@@ -1,15 +1,17 @@
-import { BaseInputProps, BaseRenderProps } from "./global.types.js"
+import { PropsBuilder } from "./global.types.js"
 
-export type TextInputRenderProps = {
-    value: string
-    cursorPosition: number
-    input: (input: string) => void
-} & BaseRenderProps
-
-export type TextInputProps = {
+type TextInputTypes = PropsBuilder<{
     /**
      * On input handler
      * @param input new value
      */
     onInput?: (input: string) => void
-} & BaseInputProps<TextInputRenderProps>
+}, {
+    value: string
+    cursorPosition: number
+    input: (input: string) => void
+}>
+
+export type TextInputRenderProps = TextInputTypes['renderProps']
+
+export type TextInputProps = TextInputTypes['inputProps']
