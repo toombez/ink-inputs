@@ -23,6 +23,25 @@ export type UseFocusOptions = Parameters<typeof useFocus>[0]
  */
 export type Handler = () => void
 
+export type UseBaseInputOptions = {
+    isDisabled?: boolean
+    focusOptions?: UseFocusOptions
+
+    /**
+     * Focus handler
+     */
+    onFocus?: Handler
+
+    /**
+     * Blur handler
+     */
+    onBlur?: Handler
+}
+
+export type UseBaseInputResult = {
+    isDisabled: boolean
+} & ReturnType<typeof useFocus>
+
 /**
  * Input render component type
  */
@@ -44,12 +63,7 @@ export type InputChildren<
 /**
  * Input render common props
  */
-export type BaseRenderProps = {
-    /**
-     * Is focused input
-     */
-    isFocused: boolean
-}
+export type BaseRenderProps = {} & UseBaseInputResult
 
 /**
  * Input common props
@@ -71,17 +85,7 @@ export type BaseInputProps<
      * `useFocus` hook options
      */
     focusOptions?: UseFocusOptions
-
-    /**
-     * Focus handler
-     */
-    onFocus?: Handler
-
-    /**
-     * Blur handler
-     */
-    onBlur?: Handler
-}
+} & UseBaseInputOptions
 
 export type PropsBuilder<
     /**
