@@ -10,7 +10,7 @@ const UseBaseInput = ({
 }: UseBaseInputOptions): UseBaseInputResult => {
     const _focusOptions: UseFocusOptions = {
         ...focusOptions,
-        isActive: isDisabled,
+        isActive: !isDisabled,
     }
 
     const { focus, isFocused } = useFocus(_focusOptions)
