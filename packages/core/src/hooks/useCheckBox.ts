@@ -2,15 +2,20 @@ import React from 'react'
 import { CheckBoxProps, CheckBoxRenderProps } from '@types';
 import { useFocus, useInput } from 'ink';
 import { useCursor } from './useCursor.js';
+import { UseBaseInput } from './useBaseInput.js';
 
 function useCheckBox<T>({
     options,
     focusOptions,
     onSelect = () => {},
-    onBlur = () => {},
-    onFocus = () => {},
+
+    ...useBaseInputOptions
 }: CheckBoxProps<T>): CheckBoxRenderProps<T> {
-    const { isFocused } = useFocus(focusOptions)
+    const {
+        focus,
+        isDisabled,
+        isFocused,
+    } = UseBaseInput(useBaseInputOptions)
 
     const [selectedIndexes, setSelectedIndexes] = React.useState<number[]>([])
     const selected = selectedIndexes
@@ -41,7 +46,6 @@ function useCheckBox<T>({
     }
 
     React.useCallback(() => onSelect(selected), [selectedIndexes])
-    React.useCallback(() => isFocused ? onBlur : onFocus, [isFocused])
 
     useInput((input, key) => {
         const isEnter = key.return
@@ -71,11 +75,13 @@ function useCheckBox<T>({
         selected,
         selectedIndexes,
         isFocused,
+        isDisabled,
         options,
         cursorIndex: position,
 
         select,
         unselect,
+        focus,
     }
 }
 
