@@ -1,22 +1,23 @@
 import React from 'react'
 import { useFocus, useInput } from 'ink'
 import { ButtonProps, ButtonRenderProps } from '@types'
+import { UseBaseInput } from './useBaseInput.js'
 
 const useButton = ({
     onClick = () => {},
-    onBlur = () => {},
-    onFocus = () => {},
-
-    focusOptions,
     label = '',
+
+    ...useBaseInputOptions
 }: ButtonProps): ButtonRenderProps => {
-    const { isFocused, focus } = useFocus(focusOptions)
+    const {
+        isFocused,
+        isDisabled,
+        focus,
+    } = UseBaseInput(useBaseInputOptions)
 
     function click() {
         onClick?.()
     }
-
-    React.useCallback(isFocused ? onFocus : onBlur, [isFocused])
 
     useInput((input, key) => {
         const isEnter = key.return
@@ -29,9 +30,11 @@ const useButton = ({
 
     return {
         isFocused,
+        isDisabled,
         label,
 
         click,
+        focus,
     }
 }
 

@@ -3,16 +3,19 @@ import { RadioProps, RadioRenderProps } from '@types'
 import { useFocus, useInput } from 'ink'
 import { clamp } from '@/utils.js'
 import { useCursor } from './useCursor.js'
+import { UseBaseInput } from './useBaseInput.js'
 
 function useRadio<T>({
     options,
-    focusOptions,
-
-    onBlur = () => {},
     onChange = () => {},
-    onFocus = () => {},
+    ...useBaseInputOptions
 }: RadioProps<T>): RadioRenderProps<T> {
-    const { isFocused } = useFocus(focusOptions)
+
+    const {
+        focus,
+        isDisabled,
+        isFocused,
+    } = UseBaseInput(useBaseInputOptions)
 
     const {
         next,
@@ -46,17 +49,18 @@ function useRadio<T>({
         }
     }, { isActive: isFocused })
 
-    React.useCallback(isFocused ? onBlur : onFocus, [isFocused])
     React.useCallback(() => onChange(selected), [selectedIndex])
 
     return {
         options,
+        isDisabled,
         isFocused,
         selected,
         selectedIndex,
         cursorIndex: position,
 
         select,
+        focus,
     }
 }
 

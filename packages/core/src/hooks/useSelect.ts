@@ -3,18 +3,23 @@ import { useFocus, useInput } from 'ink'
 import { clamp } from '@/utils.js'
 import { SelectProps, SelectRenderProps, UseFocusOptions } from '@types'
 import { useCursor } from './useCursor.js'
+import { UseBaseInput } from './useBaseInput.js'
 
 function useSelect<T>({
-    focusOptions,
     options,
     showCount = 3,
 
-    onBlur = () => {},
-    onFocus = () => {},
     onSelect = () => {},
+    ...useBaseInputOptions
 }: SelectProps<T>): SelectRenderProps<T> {
     const minSelectedIndex = 0
     const maxSelectedIndex = options.length - 1
+
+    const {
+        focus,
+        isDisabled,
+        isFocused,
+    } = UseBaseInput(useBaseInputOptions)
 
     const {
         next,
@@ -25,8 +30,6 @@ function useSelect<T>({
     const [isOpened, setIsOpened] = React.useState(false)
 
     const selected = options.at(selectedIndex)!
-
-    const { isFocused, focus } = useFocus(focusOptions)
 
     function open() {
         setIsOpened(() => true)
@@ -71,10 +74,10 @@ function useSelect<T>({
     }, { isActive: isFocused })
 
     React.useCallback(() => onSelect(selected.value), [selectedIndex])
-    React.useCallback(isFocused ? onFocus : onBlur, [isFocused])
 
     return {
         isFocused,
+        isDisabled,
         isOpened,
         selectedIndex,
         selected,
@@ -85,6 +88,7 @@ function useSelect<T>({
         select,
         open,
         close,
+        focus,
     }
 }
 
