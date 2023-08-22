@@ -1,12 +1,32 @@
 import React from 'react'
-import { CheckBoxProps, CheckBoxRenderProps } from '@types';
-import { useFocus, useInput } from 'ink';
+import { useInput } from 'ink';
 import { useCursor } from './useCursor.js';
 import { UseBaseInput } from './useBaseInput.js';
+import { PropsBuilder } from '@types';
+
+export type CheckBoxOption<T> = {
+    label: string
+    value: T
+}
+
+type CheckBoxTypes<T> = PropsBuilder<{
+    options: CheckBoxOption<T>[]
+    onSelect?: (selected: T[]) => void
+}, {
+    options: CheckBoxOption<T>[]
+    selected: T[]
+    selectedIndexes: number[]
+    cursorIndex: number
+
+    select: (index: number) => void
+    unselect: (element: T) => void
+}>
+
+export type CheckBoxProps<T> = CheckBoxTypes<T>['InputProps']
+export type CheckBoxRenderProps<T> = CheckBoxTypes<T>['RenderProps']
 
 function useCheckBox<T>({
     options,
-    focusOptions,
     onSelect = () => {},
 
     ...useBaseInputOptions
