@@ -1,6 +1,6 @@
 import React from 'react'
 import { Text } from 'ink'
-import { useButton } from '@ink-inputs/core'
+import { ButtonProps, useButton } from '@ink-inputs/core'
 import { ButtonRenderProps, InkChildren } from '@ink-inputs/core'
 import Composer from './Composer.js'
 
@@ -15,7 +15,7 @@ function ButtonRenderFallback({
     )
 }
 
-const Button: React.FC<ButtonRenderProps> = Composer({
+const Button: React.FC<ButtonProps> = Composer({
     fallback: ButtonRenderFallback,
     hook: useButton
 })
