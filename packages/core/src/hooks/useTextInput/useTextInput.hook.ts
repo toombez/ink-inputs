@@ -1,25 +1,8 @@
 import React, { useEffect, useRef } from 'react'
-import { PropsBuilder } from '@types'
 import { useInput as useKeyboardInput } from 'ink'
-import { useCursor } from './useCursor.js'
-import { UseBaseInput } from './useBaseInput.js'
-
-type TextInputTypes = PropsBuilder<{
-    /**
-     * On input handler
-     * @param input new value
-     */
-    onInput?: (input: string) => void
-}, {
-    value: string
-    cursorPosition: number
-    input: (input: string) => void
-}>
-
-type TextInputCursorOperations = 'ADD' | 'REMOVE'
-
-export type TextInputProps = TextInputTypes['InputProps']
-export type TextInputRenderProps = TextInputTypes['RenderProps']
+import { TextInputCursorOperations, TextInputProps, TextInputRenderProps } from './useTextInput.types.js'
+import { UseBaseInput } from '@hooks/index.js'
+import { useCursor } from '@hooks/useCursor/useCursor.hook.js'
 
 export function useTextInput({
     onInput,

@@ -1,5 +1,5 @@
 import { InkChildren, useRender } from '@ink-inputs/core'
-import type { BaseInputProps, BaseRenderProps } from '@ink-inputs/core/types'
+import type { BaseInputProps, BaseRenderProps } from '@ink-inputs/core'
 import { IComposerProps } from '@types'
 import React from 'react'
 

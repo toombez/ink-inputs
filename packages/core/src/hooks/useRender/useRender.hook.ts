@@ -1,9 +1,6 @@
 import React from 'react'
-import { BaseInputProps, InputRender, BaseRenderProps, InkChildren } from '@types'
-
-type IRenderChildrenProps = {
-    children: InkChildren
-}
+import type { BaseInputProps, InputRender, BaseRenderProps } from '@types'
+import type { IRenderChildrenProps } from './useRender.types.js'
 
 const RenderChildren = ({ children }: IRenderChildrenProps) => children
 

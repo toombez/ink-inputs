@@ -1,19 +1,9 @@
 import React from 'react'
-import { clamp, moduloSequence } from '@/utils.js';
-
-export type UseCursorOptions = {
-    isRepeating?: boolean
-    minPosition?: number
-    maxPosition: number
-}
-
-export type UseCursorResult = {
-    position: number
-    move: (offset: number) => void
-    next: () => void
-    previous: () => void
-}
-
+import { clamp, moduloSequence } from '@/utils.js'
+import {
+    UseCursorOptions,
+    UseCursorResult,
+} from './useCursor.types.js'
 
 function useCursor({
     isRepeating = false,
