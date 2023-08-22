@@ -1,9 +1,28 @@
 import React from 'react'
-import { RadioProps, RadioRenderProps } from '@types'
+import { PropsBuilder } from '@types'
 import { useFocus, useInput } from 'ink'
 import { clamp } from '@/utils.js'
 import { useCursor } from './useCursor.js'
 import { UseBaseInput } from './useBaseInput.js'
+
+type RadioTypes<T> = PropsBuilder<{
+    options: RadioOption<T>[]
+    onChange?: (value: T) => void
+}, {
+    options: RadioOption<T>[]
+    selected: T
+    selectedIndex: number
+    cursorIndex: number
+    select: (delta: number) => void
+}>
+
+export type RadioOption<T> = {
+    value: T
+    label: string
+}
+
+export type RadioProps<T> = RadioTypes<T>['InputProps']
+export type RadioRenderProps<T> = RadioTypes<T>['RenderProps']
 
 function useRadio<T>({
     options,
