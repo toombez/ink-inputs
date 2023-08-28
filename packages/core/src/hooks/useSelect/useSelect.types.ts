@@ -14,10 +14,9 @@ type SelectTypes<T> = PropsBuilder<{
      * @param value selected option value
      * @returns void
      */
-    onSelect?: (value: T) => void
-    /**
-     * On blur handler
-     */
+    onSelect?: (value: SelectOption<T> | null) => void
+
+    value?: SelectOption<T> | null
 }, {
     /**
      * Is opened select
@@ -34,11 +33,11 @@ type SelectTypes<T> = PropsBuilder<{
     /**
      * Selected index
      */
-    selectedIndex: number
+    selectedIndex: number | null
     /**
      * Selected option
      */
-    selected: SelectOption<T>
+    selected: SelectOption<T> | null
     /**
      * Open select emitter
      */
@@ -51,7 +50,7 @@ type SelectTypes<T> = PropsBuilder<{
      * Select emitter
      * @param delta new option index delta
      */
-    select: (delta: number) => void
+    select: (option: SelectOption<T> | null) => void
 
     cursorIndex: number
 }>

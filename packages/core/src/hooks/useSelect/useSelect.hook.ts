@@ -1,6 +1,6 @@
 import React from 'react'
 import { useInput } from 'ink'
-import { SelectProps, SelectRenderProps } from './useSelect.types.js'
+import { SelectOption, SelectProps, SelectRenderProps } from './useSelect.types.js'
 import { UseBaseInput, useCursor } from '@hooks'
 
 function useSelect<T>({
@@ -8,6 +8,7 @@ function useSelect<T>({
     showCount = 3,
 
     onSelect = () => {},
+    value = null,
     ...useBaseInputOptions
 }: SelectProps<T>): SelectRenderProps<T> {
     const minSelectedIndex = 0
@@ -24,10 +25,7 @@ function useSelect<T>({
         previous,
         position,
     } = useCursor({ maxPosition: options.length })
-    const [selectedIndex, setSelectedIndex] = React.useState<number>(0)
     const [isOpened, setIsOpened] = React.useState(false)
-
-    const selected = options.at(selectedIndex)!
 
     function open() {
         setIsOpened(() => true)
@@ -37,9 +35,25 @@ function useSelect<T>({
         setIsOpened(() => false)
     }
 
-    function select(optionIndex: number) {
-        setSelectedIndex(() => optionIndex)
+    function select(option: SelectOption<T> | null) {
+        if (option !== null && !options.includes(option)) {
+            return
+        }
+
+        onSelect?.(option)
     }
+
+    React.useEffect(() => {
+        if (!value) {
+            return
+        }
+
+        if (options.includes(value)) {
+            return
+        }
+
+        select(null)
+    }, [options])
 
     useInput((input, key) => {
         const isDownArrow = key.downArrow
@@ -67,21 +81,21 @@ function useSelect<T>({
         }
 
         if (isEnter && isOpened) {
-            return select(position)
+            return select(options.at(position)!)
         }
     }, { isActive: isFocused })
 
-    React.useCallback(() => onSelect(selected.value), [selectedIndex])
+    const selectedIndex = value ? options.indexOf(value) : null
 
     return {
         isFocused,
         isDisabled,
         isOpened,
-        selectedIndex,
-        selected,
         options,
         showCount,
         cursorIndex: position,
+        selected: value,
+        selectedIndex,
 
         select,
         open,
