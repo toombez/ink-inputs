@@ -2,13 +2,14 @@ import type { PropsBuilder } from "@types"
 
 type RadioTypes<T> = PropsBuilder<{
     options: RadioOption<T>[]
-    onChange?: (value: T) => void
+    onChange?: (option: RadioOption<T> | null) => void
+    value?: RadioOption<T> | null
 }, {
     options: RadioOption<T>[]
-    selected: T
-    selectedIndex: number
+    selected: RadioOption<T> | null
+    selectedIndex: number | null
     cursorIndex: number
-    select: (delta: number) => void
+    select: (option: RadioOption<T> | null) => void
 }>
 
 export type RadioOption<T> = {
