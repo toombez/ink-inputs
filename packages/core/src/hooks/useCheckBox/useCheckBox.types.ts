@@ -7,15 +7,16 @@ export type CheckBoxOption<T> = {
 
 type CheckBoxTypes<T> = PropsBuilder<{
     options: CheckBoxOption<T>[]
-    onSelect?: (selected: T[]) => void
+    value?: CheckBoxOption<T>[]
+    onSelect?: (selected: CheckBoxOption<T>[]) => void
 }, {
     options: CheckBoxOption<T>[]
-    selected: T[]
+    selected: CheckBoxOption<T>[]
     selectedIndexes: number[]
     cursorIndex: number
 
-    select: (index: number) => void
-    unselect: (element: T) => void
+    select: (option: CheckBoxOption<T>) => void
+    unselect: (element: CheckBoxOption<T>) => void
 }>
 
 export type CheckBoxProps<T> = CheckBoxTypes<T>['InputProps']
