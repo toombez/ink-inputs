@@ -1,11 +1,12 @@
 import React, { useEffect, useRef } from 'react'
 import { useInput as useKeyboardInput } from 'ink'
 import { TextInputCursorOperations, TextInputProps, TextInputRenderProps } from './useTextInput.types.js'
-import { UseBaseInput } from '@hooks/index.js'
+import { UseBaseInput, UseBaseInputOptions, UseCursorOptions } from '@hooks/index.js'
 import { useCursor } from '@hooks/useCursor/useCursor.hook.js'
 
 export function useTextInput({
     onInput,
+    value = "",
 
     ...useBaseInputOptions
 }: TextInputProps): TextInputRenderProps {
@@ -15,7 +16,6 @@ export function useTextInput({
         isFocused,
     } = UseBaseInput(useBaseInputOptions)
 
-    const [value, setValue] = React.useState<string>('')
     const previousOperation = useRef<TextInputCursorOperations | null>(null)
 
     const {
@@ -65,25 +65,22 @@ export function useTextInput({
     }, { isActive: isFocused })
 
     function removeChar() {
-        return setValue((value) => {
-            previousOperation.current = 'REMOVE'
-            return value.slice(0, cursorPosition) + value.slice(cursorPosition + 1)
-        })
+        previousOperation.current = 'REMOVE'
+
+        input(value.slice(0, cursorPosition) + value.slice(cursorPosition + 1))
     }
 
     function addChar(char: string) {
-        return setValue((value) => {
-            const beforeCursorChars = value.slice(0, cursorPosition) || ''
-            const atCursorChar = value.at(cursorPosition) || ''
-            const afterCursorChars = value.slice(cursorPosition + 1) || ''
+        const beforeCursorChars = value.slice(0, cursorPosition) || ''
+        const atCursorChar = value.at(cursorPosition) || ''
+        const afterCursorChars = value.slice(cursorPosition + 1) || ''
 
-            previousOperation.current = 'ADD'
-            return beforeCursorChars + char + atCursorChar + afterCursorChars
-        })
+        previousOperation.current = 'ADD'
+
+        input(beforeCursorChars + char + atCursorChar + afterCursorChars)
     }
 
     function input(value: string) {
-        setValue(() => value)
         onInput?.(value)
     }
 
