@@ -2,6 +2,7 @@ import React from 'react'
 import { useInput } from 'ink'
 import { UseBaseInput, useCursor } from '@hooks'
 import type {
+    CheckBoxOption,
     CheckBoxProps,
     CheckBoxRenderProps,
 } from './useCheckBox.types.js'
@@ -9,6 +10,7 @@ import type {
 function useCheckBox<T>({
     options,
     onSelect = () => {},
+    value = [],
 
     ...useBaseInputOptions
 }: CheckBoxProps<T>): CheckBoxRenderProps<T> {
@@ -18,35 +20,25 @@ function useCheckBox<T>({
         isFocused,
     } = UseBaseInput(useBaseInputOptions)
 
-    const [selectedIndexes, setSelectedIndexes] = React.useState<number[]>([])
-    const selected = selectedIndexes
-        .map((optionIndex) => options.at(optionIndex)!.value)
+    const selectedIndexes = value.map((option) => options.indexOf(option))
 
-    const { position, next, previous } = useCursor({
+    const {
+        position,
+        next,
+        previous
+    } = useCursor({
         maxPosition: options.length
     })
-    const isCursorIndexSelected = selectedIndexes.includes(position)
 
-    function select(index: number) {
-        setSelectedIndexes((indexes) => {
-            const set = new Set([...indexes, index])
-            const newIndexes = [...set.values()]
-
-            return newIndexes
-        })
+    function select(option: CheckBoxOption<T>) {
+        onSelect(Array.from(new Set([...value, option])))
     }
 
-    function unselect(element: T) {
-        const optionIndex = options
-            .map((option) => option.value)
-            .indexOf(element)
-
-        setSelectedIndexes((indexes) => {
-            return indexes.filter((index) => index !== optionIndex)
-        })
+    function unselect(option: CheckBoxOption<T>) {
+        onSelect(value.filter((selectedOption) => selectedOption !== option))
     }
 
-    React.useCallback(() => onSelect(selected), [selectedIndexes])
+    const isCursorIndexSelected = value.includes(options.at(position)!)
 
     useInput((input, key) => {
         const isEnter = key.return
@@ -64,16 +56,16 @@ function useCheckBox<T>({
         }
 
         if (isEnter && isCursorIndexSelected) {
-            unselect(options.at(position)!.value)
+            unselect(options.at(position)!)
         }
 
         if (isEnter && !isCursorIndexSelected) {
-            select(position)
+            select(options.at(position)!)
         }
     }, { isActive: isFocused })
 
     return {
-        selected,
+        selected: value,
         selectedIndexes,
         isFocused,
         isDisabled,

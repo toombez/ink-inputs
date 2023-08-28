@@ -6,6 +6,8 @@ type TextInputTypes = PropsBuilder<{
      * @param input new value
      */
     onInput?: (input: string) => void
+
+    value?: string
 }, {
     value: string
     cursorPosition: number

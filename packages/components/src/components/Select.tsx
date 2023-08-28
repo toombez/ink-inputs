@@ -6,12 +6,11 @@ import Composer from './Composer.js'
 function SelectRenderFallback<T>({
     isFocused,
     isOpened,
+    selected,
     options,
     selectedIndex,
     cursorIndex,
 }: SelectRenderProps<T>): InkChildren {
-    const selected = options.at(selectedIndex)!.label
-
     return (
         <Box
             borderColor={isFocused ? 'red' : 'cyan'}
@@ -19,7 +18,7 @@ function SelectRenderFallback<T>({
             position='relative'
         >
             <Text>
-                {selected}
+                {selected?.label || 'lorem'}
             </Text>
             <Box
                 display={isOpened ? 'flex' : 'none'}

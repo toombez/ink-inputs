@@ -2,6 +2,7 @@ import React from 'react'
 import { useInput } from 'ink'
 import { UseBaseInput, useCursor } from '@hooks'
 import type {
+    RadioOption,
     RadioProps,
     RadioRenderProps,
 } from './useRadio.types.js'
@@ -9,9 +10,9 @@ import type {
 function useRadio<T>({
     options,
     onChange = () => {},
+    value = null,
     ...useBaseInputOptions
 }: RadioProps<T>): RadioRenderProps<T> {
-
     const {
         focus,
         isDisabled,
@@ -23,11 +24,21 @@ function useRadio<T>({
         previous,
         position,
     } = useCursor({ maxPosition: options.length })
-    const [selectedIndex, setSelectedIndex] = React.useState<number>(0)
-    const selected = options.at(selectedIndex)!.value
 
-    function select(optionIndex: number) {
-        setSelectedIndex(() => optionIndex)
+    React.useEffect(() => {
+        if (!value) {
+            return
+        }
+
+        if (options.includes(value)) {
+            return
+        }
+
+        select(null)
+    }, [options])
+
+    function select(option: RadioOption<T> | null) {
+        onChange(option)
     }
 
     useInput((input, key) => {
@@ -46,17 +57,17 @@ function useRadio<T>({
         }
 
         if (isEnter) {
-            select(position)
+            select(options.at(position)!)
         }
     }, { isActive: isFocused })
 
-    React.useCallback(() => onChange(selected), [selectedIndex])
+    const selectedIndex = value ? options.indexOf(value) : null
 
     return {
         options,
         isDisabled,
         isFocused,
-        selected,
+        selected: value,
         selectedIndex,
         cursorIndex: position,
 
