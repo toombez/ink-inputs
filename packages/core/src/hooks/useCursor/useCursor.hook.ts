@@ -1,39 +1,73 @@
-import React from 'react'
-import { clamp, moduloSequence } from '@/utils.js'
-import {
-    UseCursorOptions,
-    UseCursorResult,
-} from './useCursor.types.js'
+import { useState, useEffect } from "react"
+import { UseCursorOptions, UseCursorOutput } from "./useCursor.types.js"
+import { clamp, moduloCycleSequence } from "@/utils.js"
 
-function useCursor({
-    isRepeating = false,
+export const CURSOR_DEFAULT_MINIMAL_POSITION = 0 as const
+
+/**
+ * Use cursor hook
+ * @param options hook options
+ * @returns data about cursor position and functions for maniputaling it
+ */
+export function useCursor({
     maxPosition,
-    minPosition = 0,
-}: UseCursorOptions): UseCursorResult {
-    const [position, setPosition] = React.useState(minPosition)
+    minPosition = CURSOR_DEFAULT_MINIMAL_POSITION,
+    initialPosition = minPosition,
+    isCyclic = false,
+}: UseCursorOptions): UseCursorOutput {
+    // useEffect(() => {
+    //     if (initialPosition < minPosition || initialPosition > maxPosition) {
+    //         throw "Initial position cannot be outside minimal and maximum bounds."
+    //     }
+    // }, [])
 
-    function move(offset: number) {
-        setPosition((position) => {
-            return isRepeating
-                ? moduloSequence(position + offset, maxPosition, minPosition)
-                : clamp(position + offset, maxPosition - 1, minPosition)
-        })
+    const [cursorPosition, setCursorPosition] = useState(initialPosition)
+
+    const isCursorAtStart = cursorPosition === minPosition
+    const isCursorAtEnd = cursorPosition === maxPosition
+    const indexBeforeCursor = cursorPosition - 1
+    const indexAfterCursor = cursorPosition + 1
+
+    function moveCursorTo(position: number) {
+        const movedPosition = isCyclic
+            ? moduloCycleSequence(position, minPosition, maxPosition)
+            : clamp(position, minPosition, maxPosition)
+
+        setCursorPosition(movedPosition)
     }
 
-    function next() {
-        move(1)
+    function moveCursor(delta: number) {
+        moveCursorTo(cursorPosition + delta)
     }
 
-    function previous() {
-        move(-1)
+    function moveCursorToStart() {
+        moveCursorTo(minPosition)
     }
+
+    function moveCursorToEnd() {
+        moveCursorTo(maxPosition)
+    }
+
+    useEffect(() => {
+        if (cursorPosition > maxPosition) {
+            return moveCursorToEnd()
+        }
+
+        if (cursorPosition < minPosition) {
+            return moveCursorToStart()
+        }
+    }, [maxPosition, minPosition])
 
     return {
-        position,
-        move,
-        next,
-        previous,
+        cursorPosition,
+        isCursorAtStart,
+        isCursorAtEnd,
+        indexBeforeCursor,
+        indexAfterCursor,
+
+        moveCursorTo,
+        moveCursor,
+        moveCursorToStart,
+        moveCursorToEnd,
     }
 }
-
-export { useCursor }

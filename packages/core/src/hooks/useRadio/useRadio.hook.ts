@@ -1,6 +1,6 @@
 import React from 'react'
 import { useInput } from 'ink'
-import { UseBaseInput, useCursor } from '@hooks'
+import { useBaseInput, useCursor } from '@hooks'
 import type {
     RadioOption,
     RadioProps,
@@ -17,12 +17,11 @@ function useRadio<T>({
         focus,
         isDisabled,
         isFocused,
-    } = UseBaseInput(useBaseInputOptions)
+    } = useBaseInput(useBaseInputOptions)
 
     const {
-        next,
-        previous,
-        position,
+        moveCursor,
+        cursorPosition,
     } = useCursor({ maxPosition: options.length })
 
     React.useEffect(() => {
@@ -49,15 +48,15 @@ function useRadio<T>({
         const isEnter = key.return
 
         if (isDownArrow || isRightArrow) {
-            next()
+            moveCursor(1)
         }
 
         if (isUpArrow || isLeftArrow) {
-            previous()
+            moveCursor(-1)
         }
 
         if (isEnter) {
-            select(options.at(position)!)
+            select(options.at(cursorPosition)!)
         }
     }, { isActive: isFocused })
 
@@ -69,7 +68,7 @@ function useRadio<T>({
         isFocused,
         selected: value,
         selectedIndex,
-        cursorIndex: position,
+        cursorIndex: cursorPosition,
 
         select,
         focus,

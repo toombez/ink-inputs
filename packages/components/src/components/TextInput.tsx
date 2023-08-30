@@ -1,23 +1,33 @@
 import React from 'react'
-import { Box, Text } from 'ink'
-import { InkChildren, useTextInput, TextInputProps, TextInputRenderProps, useRender, useSelect } from '@ink-inputs/core'
+import { Box, Newline, Text } from 'ink'
+import { InkChildren, useTextInput, TextInputProps, TextInputRenderProps } from '@ink-inputs/core'
 import Composer from './Composer.js'
 
 function TextInputRenderFallback({
-    value,
     isFocused,
-    cursorPosition,
+    charsAfterCursor,
+    charsBeforeCursor,
+    charsUnderCursor,
+    isCursorAtEnd,
 }: TextInputRenderProps): InkChildren {
     return (
         <Box minHeight={1}>
             <Text
                 underline={isFocused}
             >
-                {value.slice(0, cursorPosition)}
-                <Text backgroundColor="gray">
-                    {value.at(cursorPosition)!}
+                {charsBeforeCursor}
+                <Text
+                    backgroundColor={isFocused ? "whiteBright" : "black"}
+                    color={isFocused ? "gray" : "white"}
+                >
+                    {charsUnderCursor}
                 </Text>
-                {value.slice(cursorPosition + 1)}
+                {charsAfterCursor}
+                {isCursorAtEnd && (
+                    <Text backgroundColor={isFocused ? "whiteBright" : "black"}>
+                        {" "}
+                    </Text>
+                )}
             </Text>
         </Box>
     )

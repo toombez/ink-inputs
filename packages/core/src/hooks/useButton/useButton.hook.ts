@@ -1,5 +1,5 @@
 import { useInput } from 'ink'
-import { UseBaseInput } from '@hooks'
+import { useBaseInput } from '@hooks'
 import type {
     ButtonProps,
     ButtonRenderProps
@@ -15,7 +15,7 @@ const useButton = ({
         isFocused,
         isDisabled,
         focus,
-    } = UseBaseInput(useBaseInputOptions)
+    } = useBaseInput(useBaseInputOptions)
 
     function click() {
         onClick?.()

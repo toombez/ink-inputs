@@ -1,4 +1,4 @@
-export { UseBaseInput } from './useBaseInput.hook.js'
+export { useBaseInput } from './useBaseInput.hook.js'
 export type {
     UseBaseInputOptions,
     UseBaseInputResult

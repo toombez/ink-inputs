@@ -11,10 +11,14 @@ type TextInputTypes = PropsBuilder<{
 }, {
     value: string
     cursorPosition: number
+    charsBeforeCursor: string
+    charsUnderCursor: string
+    charsAfterCursor: string
+    isCursorAtEnd: boolean
     input: (input: string) => void
 }>
 
-export type TextInputCursorOperations = 'ADD' | 'REMOVE'
+export type TEXT_INPUT_KEY_OPERATION = "ADD_CHAR" | "BACKSPACE" | "DELETE"
 
 export type TextInputProps = TextInputTypes['InputProps']
 export type TextInputRenderProps = TextInputTypes['RenderProps']
