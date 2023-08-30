@@ -27,11 +27,11 @@ export function useWideCursor({
         minPosition,
     })
 
-    useEffect(() => {
-        if (cursorPosition + initialWidth > maxPosition) {
-            throw "Cursor out bounds."
-        }
-    }, [])
+    // useEffect(() => {
+    //     if (cursorPosition + initialWidth > maxPosition) {
+    //         throw "Cursor out bounds."
+    //     }
+    // }, [])
 
     const [cursorWidth, setCursorWidth] = useState<number>(initialWidth)
 

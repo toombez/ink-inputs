@@ -15,11 +15,11 @@ export function useCursor({
     initialPosition = minPosition,
     isCyclic = false,
 }: UseCursorOptions): UseCursorOutput {
-    useEffect(() => {
-        if (initialPosition < minPosition || initialPosition > maxPosition) {
-            throw "Initial position cannot be outside minimal and maximum bounds."
-        }
-    }, [])
+    // useEffect(() => {
+    //     if (initialPosition < minPosition || initialPosition > maxPosition) {
+    //         throw "Initial position cannot be outside minimal and maximum bounds."
+    //     }
+    // }, [])
 
     const [cursorPosition, setCursorPosition] = useState(initialPosition)
 
