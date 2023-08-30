@@ -1,5 +1,8 @@
-export { useCursor } from './useCursor.hook.js'
+export {
+    CURSOR_DEFAULT_MINIMAL_POSITION,
+    useCursor,
+} from './useCursor.hook.js'
 export type {
     UseCursorOptions,
-    UseCursorResult,
+    UseCursorOutput,
 } from './useCursor.types.js'
