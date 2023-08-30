@@ -1,7 +1,7 @@
 import React from 'react'
 import { useInput } from 'ink'
 import { SelectOption, SelectProps, SelectRenderProps } from './useSelect.types.js'
-import { UseBaseInput, useCursor } from '@hooks'
+import { useBaseInput, useCursor } from '@hooks'
 
 function useSelect<T>({
     options,
@@ -18,12 +18,11 @@ function useSelect<T>({
         focus,
         isDisabled,
         isFocused,
-    } = UseBaseInput(useBaseInputOptions)
+    } = useBaseInput(useBaseInputOptions)
 
     const {
-        next,
-        previous,
-        position,
+        moveCursor,
+        cursorPosition,
     } = useCursor({ maxPosition: options.length })
     const [isOpened, setIsOpened] = React.useState(false)
 
@@ -65,11 +64,11 @@ function useSelect<T>({
         const isEsc = key.escape
 
         if ((isDownArrow || isRightArrow) && isOpened) {
-            next()
+            moveCursor(1)
         }
 
         if ((isUpArrow || isLeftArrow) && isOpened) {
-            previous()
+            moveCursor(-1)
         }
 
         if (!isOpened && (isEnter || isSpace)) {
@@ -81,7 +80,7 @@ function useSelect<T>({
         }
 
         if (isEnter && isOpened) {
-            return select(options.at(position)!)
+            return select(options.at(cursorPosition)!)
         }
     }, { isActive: isFocused })
 
@@ -93,7 +92,7 @@ function useSelect<T>({
         isOpened,
         options,
         showCount,
-        cursorIndex: position,
+        cursorIndex: cursorPosition,
         selected: value,
         selectedIndex,
 

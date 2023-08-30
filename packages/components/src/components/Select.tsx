@@ -32,7 +32,7 @@ function SelectRenderFallback<T>({
                         underline={selectedIndex === index}
                         backgroundColor={cursorIndex === index ? 'gray' : 'black'}
                     >
-                        {index}|{cursorIndex}{option.label}
+                        {option.label}
                     </Text>
                 ))}
             </Box>
