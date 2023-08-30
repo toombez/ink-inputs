@@ -5,7 +5,7 @@ import type {
     UseBaseInputResult
 } from "./useBaseInput.types.js"
 
-const UseBaseInput = ({
+const useBaseInput = ({
     id,
     autoFocus,
     isDisabled = false,
@@ -27,4 +27,4 @@ const UseBaseInput = ({
     }
 }
 
-export { UseBaseInput }
+export { useBaseInput }
