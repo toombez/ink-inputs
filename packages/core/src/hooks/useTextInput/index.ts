@@ -1,6 +1,6 @@
 export { useTextInput } from './useTextInput.hook.js'
 export type {
-    TextInputCursorOperations,
+    TEXT_INPUT_KEY_OPERATION,
     TextInputProps,
     TextInputRenderProps,
 } from './useTextInput.types.js'
