@@ -4,9 +4,7 @@ import { InkChildren, useTextInput, TextInputProps, TextInputRenderProps } from 
 import Composer from './Composer.js'
 
 function TextInputRenderFallback({
-    value,
     isFocused,
-    cursorPosition,
     charsAfterCursor,
     charsBeforeCursor,
     charsUnderCursor,
@@ -19,20 +17,17 @@ function TextInputRenderFallback({
             >
                 {charsBeforeCursor}
                 <Text
-                    backgroundColor="whiteBright"
-                    color="gray"
+                    backgroundColor={isFocused ? "whiteBright" : "black"}
+                    color={isFocused ? "gray" : "white"}
                 >
                     {charsUnderCursor}
                 </Text>
                 {charsAfterCursor}
                 {isCursorAtEnd && (
-                    <Text backgroundColor="whiteBright">
+                    <Text backgroundColor={isFocused ? "whiteBright" : "black"}>
                         {" "}
                     </Text>
                 )}
-                <Newline />
-
-                {charsBeforeCursor}|{charsUnderCursor}|{charsAfterCursor}
             </Text>
         </Box>
     )

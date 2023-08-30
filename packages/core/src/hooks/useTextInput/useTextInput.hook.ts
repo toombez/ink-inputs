@@ -29,7 +29,8 @@ export function useTextInput({
         isCursorMinimalWidth,
     } = useWideCursor({
         maxPosition: value.length,
-        initialWidth: 1
+        initialWidth: 1,
+        initialPosition: 0,
     })
 
     const previousOperation = useRef<TEXT_INPUT_KEY_OPERATION | null>(null)
@@ -38,6 +39,10 @@ export function useTextInput({
     const charsAfterCursor = value.slice(indexAfterCursor) || ''
 
     useInput((char, key) => {
+        if (key.return) {
+            return
+        }
+
         if (char) {
             previousOperation.current = 'ADD_CHAR'
 
@@ -99,7 +104,7 @@ export function useTextInput({
         if (key.rightArrow) {
             return moveCursor(1)
         }
-    })
+    }, { isActive: isFocused })
 
     useEffect(() => {
         switch (previousOperation.current) {
