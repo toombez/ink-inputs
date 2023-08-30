@@ -8,11 +8,12 @@ function CheckBoxRenderFallback<T>({
     options,
     cursorIndex,
     selectedIndexes,
+    selected,
 }: CheckBoxRenderProps<T>): InkChildren {
     return (
         <Box gap={1}>
             {options.map((option, index) => (
-                <Text underline={index === cursorIndex}>
+                <Text key={index} underline={index === cursorIndex}>
                     {selectedIndexes.includes(index)
                         ? figureSet.checkboxOn
                         : figureSet.checkboxOff

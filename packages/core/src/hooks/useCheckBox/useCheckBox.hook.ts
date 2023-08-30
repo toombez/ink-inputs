@@ -1,6 +1,6 @@
 import React from 'react'
 import { useInput } from 'ink'
-import { UseBaseInput, useCursor } from '@hooks'
+import { useBaseInput, useCursor } from '@hooks'
 import type {
     CheckBoxOption,
     CheckBoxProps,
@@ -18,16 +18,15 @@ function useCheckBox<T>({
         focus,
         isDisabled,
         isFocused,
-    } = UseBaseInput(useBaseInputOptions)
+    } = useBaseInput(useBaseInputOptions)
 
     const selectedIndexes = value.map((option) => options.indexOf(option))
 
     const {
-        position,
-        next,
-        previous
+        cursorPosition,
+        moveCursor,
     } = useCursor({
-        maxPosition: options.length
+        maxPosition: options.length - 1,
     })
 
     function select(option: CheckBoxOption<T>) {
@@ -38,9 +37,9 @@ function useCheckBox<T>({
         onSelect(value.filter((selectedOption) => selectedOption !== option))
     }
 
-    const isCursorIndexSelected = value.includes(options.at(position)!)
+    const isCursorIndexSelected = value.includes(options.at(cursorPosition)!)
 
-    useInput((input, key) => {
+    useInput((char, key) => {
         const isEnter = key.return
         const isDownArrow = key.downArrow
         const isUpArrow = key.upArrow
@@ -48,19 +47,19 @@ function useCheckBox<T>({
         const isRightArrow = key.rightArrow
 
         if (isDownArrow || isRightArrow) {
-            next()
+            moveCursor(1)
         }
 
         if (isUpArrow || isLeftArrow) {
-            previous()
+            moveCursor(-1)
         }
 
         if (isEnter && isCursorIndexSelected) {
-            unselect(options.at(position)!)
+            unselect(options.at(cursorPosition)!)
         }
 
         if (isEnter && !isCursorIndexSelected) {
-            select(options.at(position)!)
+            select(options.at(cursorPosition)!)
         }
     }, { isActive: isFocused })
 
@@ -70,7 +69,7 @@ function useCheckBox<T>({
         isFocused,
         isDisabled,
         options,
-        cursorIndex: position,
+        cursorIndex: cursorPosition,
 
         select,
         unselect,
