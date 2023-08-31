@@ -1,24 +1,24 @@
-import React from "react"
+import { useEffect } from "react"
 import { useFocus } from "ink"
 import type {
-    UseBaseInputOptions,
-    UseBaseInputResult
-} from "./useBaseInput.types.js"
+    UseFormElementOptions,
+    UseFormElementOutput,
+} from "./useFormElement.types.js"
 
-const useBaseInput = ({
+export const useFormElement = ({
     id,
     autoFocus,
     isDisabled = false,
     onBlur = () => {},
     onFocus = () => {},
-}: UseBaseInputOptions): UseBaseInputResult => {
+}: UseFormElementOptions): UseFormElementOutput => {
     const { focus, isFocused } = useFocus({
         autoFocus,
         id,
         isActive: !isDisabled,
     })
 
-    React.useEffect(isFocused ? onFocus : onBlur, [isFocused])
+    useEffect(isFocused ? onFocus : onBlur, [isFocused])
 
     return {
         isDisabled,
@@ -26,5 +26,3 @@ const useBaseInput = ({
         focus,
     }
 }
-
-export { useBaseInput }
