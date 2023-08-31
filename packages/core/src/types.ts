@@ -1,39 +1,48 @@
 import { useFocus } from "ink"
 
 export type InkChildren = React.ReactNode
+
 export type UseFocusOptions = NonNullable<Parameters<typeof useFocus>[0]>
-export type UseFocusResult = ReturnType<typeof useFocus>
 
-export type InputRender<
-    T extends BaseRenderProps = BaseRenderProps
-> = React.FC<T>
-export type InputChildren<
-    T extends BaseRenderProps = BaseRenderProps
-> = InkChildren | InputRender<T>
+export type UseFocusOutput = ReturnType<typeof useFocus>
 
-export type BaseInputProps<
-    T extends BaseRenderProps = BaseRenderProps
-> = {
+export type CustomRenderFC<P extends Object = {}> = (
+    props: P & FormElementRenderProps,
+) => InkChildren
+
+export type FormElementProps = {
     id?: UseFocusOptions['id']
     autoFocus?: UseFocusOptions['autoFocus']
     isDisabled?: boolean
-    children?: InputChildren<T>
-    render?: InputRender<T>
 
     onFocus?: () => void
     onBlur?: () => void
 }
 
-export type BaseRenderProps = {
+export type FormElementRenderProps = {
     isDisabled: boolean
-    isFocused: UseFocusResult['isFocused']
-    focus: UseFocusResult['focus']
+    isFocused: UseFocusOutput['isFocused']
+
+    focus: UseFocusOutput['focus']
 }
 
-export type PropsBuilder<
-    T extends Object = {},
-    K extends Object = {},
-> = {
-    InputProps: T & BaseInputProps<K & BaseRenderProps>
-    RenderProps: K & BaseRenderProps
+export type CustomRenderElementProps<P extends Object = {}> = {
+    children?: CustomRenderFC<P>
+    render?: CustomRenderFC<P>
+}
+
+export type InputElementProps<T> = {
+    placeholder?: string
+    value?: T
+
+    onChange?: (value: T) => void
+    onSubmit?: (value: T) => void
+}
+
+export type InputElementRenderProps<T> = {
+    placeholder: string
+    value: T
+
+    change: (value: T) => void
+    submit: (value: T) => void
 }
