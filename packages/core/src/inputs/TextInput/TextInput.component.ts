@@ -1,19 +1,21 @@
-import React, { useEffect, useRef } from 'react'
-import { useInput } from 'ink'
-import { TEXT_INPUT_KEY_OPERATION, TextInputProps, TextInputRenderProps } from './useTextInput.types.js'
-import { useBaseInput, useWideCursor } from '@hooks/index.js'
+import { useCustomRenderElement, useFocusableElement, useWideCursor } from "@hooks/index.js"
+import { TEXT_INPUT_KEY_OPERATION, TextInputProps } from "./TextInput.types.js"
+import TextInputFallback from "./TextInput.fallback.js"
+import { useRef, useEffect } from 'react'
+import { useInput } from "ink"
 
-export function useTextInput({
-    onInput = () => {},
-    value = "",
-
-    ...useBaseInputOptions
-}: TextInputProps): TextInputRenderProps {
+const TextInput: React.FC<TextInputProps> = ({
+    value = '',
+    onChange = () => {},
+    onSubmit = () => {},
+    placeholder = '',
+    ...rest
+}) => {
     const {
         focus,
         isDisabled,
         isFocused,
-    } = useBaseInput(useBaseInputOptions)
+    } = useFocusableElement(rest)
 
     const {
         cursorPosition,
@@ -33,6 +35,13 @@ export function useTextInput({
         initialPosition: 0,
     })
 
+    const {
+        Render,
+    } = useCustomRenderElement({
+        fallback: TextInputFallback,
+        ...rest
+    })
+
     const previousOperation = useRef<TEXT_INPUT_KEY_OPERATION | null>(null)
     const charsBeforeCursor = value.slice(0, cursorPosition) || ''
     const charsUnderCursor = value.slice(cursorPosition, indexAfterCursor) || ''
@@ -48,13 +57,13 @@ export function useTextInput({
 
             const value = charsBeforeCursor + char + charsUnderCursor + charsAfterCursor
 
-            return onInput(value)
+            return change(value)
         }
 
         if ((key.backspace || key.delete) && value.length === 1) {
             const value = ""
 
-            return onInput(value)
+            return change(value)
         }
 
         if (key.backspace) {
@@ -62,7 +71,7 @@ export function useTextInput({
 
             const value =charsBeforeCursor.slice(0, indexBeforeCursor) + charsUnderCursor + charsAfterCursor
 
-            return onInput(value)
+            return change(value)
         }
 
         if (key.delete) {
@@ -70,7 +79,7 @@ export function useTextInput({
 
             const value =charsBeforeCursor + charsUnderCursor + charsAfterCursor.slice(1)
 
-            return onInput(value)
+            return change(value)
         }
 
         if (key.escape) {
@@ -122,21 +131,29 @@ export function useTextInput({
         }
     }, [value])
 
-    function input(value: string) {
-        onInput(value)
+    function change(value: string) {
+        onChange(value)
     }
 
-    return {
+    function submit(value: string) {
+        onSubmit(value)
+    }
+
+    return Render({
         isFocused,
         isDisabled,
-        value,
-        cursorPosition,
+        isCursorAtEnd,
+        isCursorAtStart,
         charsBeforeCursor,
         charsUnderCursor,
         charsAfterCursor,
-        isCursorAtEnd,
-
+        cursorPosition,
+        placeholder,
+        value,
+        change,
         focus,
-        input,
-    }
+        submit,
+    })
 }
+
+export default TextInput
