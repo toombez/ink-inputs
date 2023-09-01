@@ -6,11 +6,9 @@ export type UseFocusOptions = NonNullable<Parameters<typeof useFocus>[0]>
 
 export type UseFocusOutput = ReturnType<typeof useFocus>
 
-export type CustomRenderFC<P extends Object = {}> = (
-    props: P & FormElementRenderProps,
-) => InkChildren
+export type CustomRenderFC<P extends object = {}> = React.FC<P>
 
-export type FormElementProps = {
+export type FocusableElementProps = {
     id?: UseFocusOptions['id']
     autoFocus?: UseFocusOptions['autoFocus']
     isDisabled?: boolean
@@ -19,30 +17,30 @@ export type FormElementProps = {
     onBlur?: () => void
 }
 
-export type FormElementRenderProps = {
+export type FocusableElementRenderProps = {
     isDisabled: boolean
     isFocused: UseFocusOutput['isFocused']
 
     focus: UseFocusOutput['focus']
 }
 
-export type CustomRenderElementProps<P extends Object = {}> = {
-    children?: CustomRenderFC<P>
-    render?: CustomRenderFC<P>
+export type CustomRenderElementProps<RenderProps extends Object = {}> = {
+    children?: CustomRenderFC<RenderProps>
+    render?: CustomRenderFC<RenderProps>
 }
 
-export type InputElementProps<T> = {
+export type InputElementProps<ValueType> = {
     placeholder?: string
-    value?: T
+    value?: ValueType
 
-    onChange?: (value: T) => void
-    onSubmit?: (value: T) => void
+    onChange?: (value: ValueType) => void
+    onSubmit?: (value: ValueType) => void
 }
 
-export type InputElementRenderProps<T> = {
+export type InputElementRenderProps<ValueType> = {
     placeholder: string
-    value: T
+    value: ValueType
 
-    change: (value: T) => void
-    submit: (value: T) => void
+    change: (value: ValueType) => void
+    submit: (value: ValueType) => void
 }
