@@ -1,17 +1,17 @@
 import { useEffect } from "react"
 import { useFocus } from "ink"
 import type {
-    UseFormElementOptions,
-    UseFormElementOutput,
-} from "./useFormElement.types.js"
+    UseFocusableElementOptions,
+    UseFocusableElementOutput,
+} from "./useFocusableElement.types.js"
 
-export const useFormElement = ({
+export const useFocusableElement = ({
     id,
     autoFocus,
     isDisabled = false,
     onBlur = () => {},
     onFocus = () => {},
-}: UseFormElementOptions): UseFormElementOutput => {
+}: UseFocusableElementOptions): UseFocusableElementOutput => {
     const { focus, isFocused } = useFocus({
         autoFocus,
         id,
