@@ -46,11 +46,16 @@ export type InputElementRenderProps<ValueType> = {
 }
 
 export type OpenableElementProps = {
-    autoOpen: boolean
+    isAutoOpen?: boolean
 }
 
 export type OpenableElementRenderProps = {
     isOpened: boolean
     open: () => void
     close: () => void
+}
+
+export type Option<ValueType> = {
+    label: string
+    value: ValueType
 }
