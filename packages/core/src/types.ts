@@ -44,3 +44,13 @@ export type InputElementRenderProps<ValueType> = {
     change: (value: ValueType) => void
     submit: (value: ValueType) => void
 }
+
+export type OpenableElementProps = {
+    autoOpen: boolean
+}
+
+export type OpenableElementRenderProps = {
+    isOpened: boolean
+    open: () => void
+    close: () => void
+}
