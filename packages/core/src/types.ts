@@ -1,39 +1,61 @@
 import { useFocus } from "ink"
 
 export type InkChildren = React.ReactNode
+
 export type UseFocusOptions = NonNullable<Parameters<typeof useFocus>[0]>
-export type UseFocusResult = ReturnType<typeof useFocus>
 
-export type InputRender<
-    T extends BaseRenderProps = BaseRenderProps
-> = React.FC<T>
-export type InputChildren<
-    T extends BaseRenderProps = BaseRenderProps
-> = InkChildren | InputRender<T>
+export type UseFocusOutput = ReturnType<typeof useFocus>
 
-export type BaseInputProps<
-    T extends BaseRenderProps = BaseRenderProps
-> = {
+export type CustomRenderFC<P extends object = {}> = React.FC<P>
+
+export type FocusableElementProps = {
     id?: UseFocusOptions['id']
     autoFocus?: UseFocusOptions['autoFocus']
     isDisabled?: boolean
-    children?: InputChildren<T>
-    render?: InputRender<T>
 
     onFocus?: () => void
     onBlur?: () => void
 }
 
-export type BaseRenderProps = {
+export type FocusableElementRenderProps = {
     isDisabled: boolean
-    isFocused: UseFocusResult['isFocused']
-    focus: UseFocusResult['focus']
+    isFocused: UseFocusOutput['isFocused']
+
+    focus: UseFocusOutput['focus']
 }
 
-export type PropsBuilder<
-    T extends Object = {},
-    K extends Object = {},
-> = {
-    InputProps: T & BaseInputProps<K & BaseRenderProps>
-    RenderProps: K & BaseRenderProps
+export type CustomRenderElementProps<RenderProps extends Object = {}> = {
+    children?: CustomRenderFC<RenderProps>
+    render?: CustomRenderFC<RenderProps>
+}
+
+export type InputElementProps<ValueType> = {
+    placeholder?: string
+    value?: ValueType
+
+    onChange?: (value: ValueType) => void
+    onSubmit?: (value: ValueType) => void
+}
+
+export type InputElementRenderProps<ValueType> = {
+    placeholder: string
+    value: ValueType
+
+    change: (value: ValueType) => void
+    submit: (value: ValueType) => void
+}
+
+export type OpenableElementProps = {
+    isAutoOpen?: boolean
+}
+
+export type OpenableElementRenderProps = {
+    isOpened: boolean
+    open: () => void
+    close: () => void
+}
+
+export type Option<ValueType> = {
+    label: string
+    value: ValueType
 }
