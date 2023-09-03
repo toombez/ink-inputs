@@ -19,7 +19,6 @@ export type RadioRenderProps<T> = {
 }
     & FocusableElementRenderProps
     & InputElementRenderProps<RadioValue<T>>
-    & OpenableElementRenderProps
 
 export type RadioProps<T> = {
     options: Array<Option<T>>
@@ -27,4 +26,3 @@ export type RadioProps<T> = {
     & FocusableElementProps
     & InputElementProps<RadioValue<T>>
     & CustomRenderElementProps<RadioRenderProps<T>>
-    & OpenableElementProps

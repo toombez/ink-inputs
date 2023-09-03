@@ -10,12 +10,9 @@ const Radio = <T, >({
     value = null,
     onChange = () => {},
     onSubmit = () => {},
-    isAutoOpen = false,
     placeholder = '',
     ...rest
 }: RadioProps<T>) => {
-    const [isOpened, setIsOpened] = useState(isAutoOpen)
-
     const {
         focus,
         isFocused,
@@ -48,52 +45,33 @@ const Radio = <T, >({
     })
 
     useInput((char, key) => {
-        if (!isOpened && (key.return || char === ' ')) {
-            return open()
-        }
-
-        if (isOpened && key.escape) {
-            return close()
-        }
-
-        if (isOpened && (key.downArrow || key.rightArrow)) {
+        if (key.downArrow || key.rightArrow) {
             return moveCursor(1)
         }
 
-        if (isOpened && (key.upArrow || key.leftArrow)) {
+        if (key.upArrow || key.leftArrow) {
             return moveCursor(-1)
         }
 
-        if (isOpened && (key.return || char === ' ')) {
-            return change(options.at(cursorPosition) || null)
+        if (key.return || char === ' ') {
+            return change(options.at(cursorPosition)!)
         }
-    })
+    }, { isActive: isFocused })
 
-    const change = select.bind(this)
+    const change = select
     const submit = change
-
-    function open() {
-        setIsOpened(true)
-    }
-
-    function close() {
-        setIsOpened(false)
-    }
 
     return Render({
         options,
         value,
         isDisabled,
         isFocused,
-        isOpened,
         placeholder,
         cursorPosition,
         valueIndex,
         change,
         submit,
         focus,
-        open,
-        close,
     })
 }
 
