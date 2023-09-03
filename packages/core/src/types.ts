@@ -45,6 +45,19 @@ export type InputElementRenderProps<ValueType> = {
     submit: (value: ValueType) => void
 }
 
+export type ArrayInputElementProps<ValueType> = InputElementProps<
+    Array<ValueType>
+>
+
+export type ArrayInputElementRenderProps<ValueType> = Omit<
+    InputElementRenderProps<Array<ValueType>>,
+    'change'
+    | 'submit'
+> & {
+    change: (value: ValueType) => void
+    submit: (value: ValueType) => void
+}
+
 export type OpenableElementProps = {
     isAutoOpen?: boolean
 }

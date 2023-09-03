@@ -4,6 +4,7 @@ import SingleSelectFallback from "./SingleSelect.fallback.js";
 import { Option } from "@types";
 import { ReactElement, useState } from "react";
 import { useInput } from "ink";
+import { useSingleSelectableList } from "@hooks/useSingleSelectableList/useSingleSelectableList.hook.js";
 
 const SHOW_COUNT_DEFAULT = 3
 
@@ -18,7 +19,6 @@ const SingleSelect = <T, >({
     ...rest
 }: SingleSelectProps<T>) => {
     const [isOpened, setIsOpened] = useState(isAutoOpen)
-    const valueIndex = value ? options.indexOf(value) : null
 
     const {
         focus,
@@ -41,6 +41,16 @@ const SingleSelect = <T, >({
         isCyclic: false,
     })
 
+    const {
+        select,
+        valueIndex,
+    } = useSingleSelectableList({
+        list: options,
+        onSelect: onChange,
+        onUnselect: () => onChange(null),
+        value,
+    })
+
     useInput((char, key) => {
         if (!isOpened && (key.return || char === ' ')) {
             return open()
@@ -59,17 +69,12 @@ const SingleSelect = <T, >({
         }
 
         if (isOpened && (key.return || char === ' ')) {
-            return change(options.at(cursorPosition) || null)
+            return change(options.at(cursorPosition)!)
         }
     })
 
-    function change(value: Option<T> | null) {
-        onChange(value)
-    }
-
-    function submit(value: Option<T> | null) {
-        onSubmit(value)
-    }
+    const change = select.bind(this)
+    const submit = change
 
     function open() {
         setIsOpened(true)
