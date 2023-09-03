@@ -1,4 +1,4 @@
-import { useCursor, useCustomRenderElement, useFocusableElement } from "@hooks/index.js";
+import { useCursor, useCustomRenderElement, useFocusableElement, useOpenableElement } from "@hooks/index.js";
 import { SingleSelectProps } from "./SingleSelect.types.js";
 import SingleSelectFallback from "./SingleSelect.fallback.js";
 import { Option } from "@types";
@@ -18,8 +18,6 @@ const SingleSelect = <T, >({
     placeholder = '',
     ...rest
 }: SingleSelectProps<T>) => {
-    const [isOpened, setIsOpened] = useState(isAutoOpen)
-
     const {
         focus,
         isFocused,
@@ -51,6 +49,15 @@ const SingleSelect = <T, >({
         value,
     })
 
+    const {
+        close,
+        isOpened,
+        open,
+        toggle,
+    } = useOpenableElement({
+        isAutoOpen,
+    })
+
     useInput((char, key) => {
         if (!isOpened && (key.return || char === ' ')) {
             return open()
@@ -75,14 +82,6 @@ const SingleSelect = <T, >({
 
     const change = select.bind(this)
     const submit = change
-
-    function open() {
-        setIsOpened(true)
-    }
-
-    function close() {
-        setIsOpened(false)
-    }
 
     return Render({
         options,
