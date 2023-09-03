@@ -78,7 +78,7 @@ const SingleSelect = <T, >({
         if (isOpened && (key.return || char === ' ')) {
             return change(options.at(cursorPosition)!)
         }
-    })
+    }, { isActive: isFocused })
 
     const change = select.bind(this)
     const submit = change
