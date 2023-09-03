@@ -16,13 +16,20 @@ const SingleSelect = <T, >({
     onSubmit = () => {},
     isAutoOpen = false,
     placeholder = '',
+    onBlur = () => {},
     ...rest
 }: SingleSelectProps<T>) => {
     const {
         focus,
         isFocused,
         isDisabled,
-    } = useFocusableElement(rest)
+    } = useFocusableElement({
+        ...rest,
+        onBlur: () => {
+            close()
+            onBlur()
+        }
+    })
 
     const {
         Render,
