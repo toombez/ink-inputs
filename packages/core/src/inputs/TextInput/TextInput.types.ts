@@ -11,6 +11,7 @@ export type TextInputRenderProps = {
     charsBeforeCursor: string
     charsUnderCursor: string
     charsAfterCursor: string
+    isShowPlaceholder: boolean
 }
     & FocusableElementRenderProps
     & InputElementRenderProps<string>

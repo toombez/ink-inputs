@@ -16,13 +16,20 @@ const SingleSelect = <T, >({
     onSubmit = () => {},
     isAutoOpen = false,
     placeholder = '',
+    onBlur = () => {},
     ...rest
 }: SingleSelectProps<T>) => {
     const {
         focus,
         isFocused,
         isDisabled,
-    } = useFocusableElement(rest)
+    } = useFocusableElement({
+        ...rest,
+        onBlur: () => {
+            close()
+            onBlur()
+        }
+    })
 
     const {
         Render,
@@ -34,6 +41,8 @@ const SingleSelect = <T, >({
     const {
         cursorPosition,
         moveCursor,
+        isCursorAtEnd,
+        isCursorAtStart,
     } = useCursor({
         maxPosition: options.length - 1,
         isCyclic: false,
@@ -78,10 +87,25 @@ const SingleSelect = <T, >({
         if (isOpened && (key.return || char === ' ')) {
             return change(options.at(cursorPosition)!)
         }
-    })
+    }, { isActive: isFocused })
 
     const change = select.bind(this)
     const submit = change
+
+    const showedOptionsLowerBound = isCursorAtStart
+        ? 0
+        : isCursorAtEnd
+            ? options.length - showCount
+            : cursorPosition - Math.floor(showCount / 2)
+    const showedOptionsUpperBound = isCursorAtEnd
+        ? options.length
+        : isCursorAtStart
+            ? showCount
+            : cursorPosition + Math.ceil(showCount / 2)
+
+    const showedOptions = options
+        .map<[Option<T>, number]>((option, index) => [option, index])
+        .slice(showedOptionsLowerBound, showedOptionsUpperBound)
 
     return Render({
         options,
@@ -93,6 +117,7 @@ const SingleSelect = <T, >({
         cursorPosition,
         showCount,
         valueIndex,
+        showedOptions,
         change,
         submit,
         focus,

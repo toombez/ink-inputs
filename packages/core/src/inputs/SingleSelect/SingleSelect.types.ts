@@ -17,6 +17,7 @@ export type SingleSelectRenderProps<T> = {
     showCount: number
     valueIndex: number | null
     cursorPosition: UseCursorOutput['cursorPosition']
+    showedOptions: Array<[Option<T>, number]>
 }
     & FocusableElementRenderProps
     & InputElementRenderProps<SingleSelectValue<T>>

@@ -1,5 +1,5 @@
 import React from "react"
-import { Box, Text } from "ink"
+import { Text } from "ink"
 import { ButtonRenderProps } from "./Button.types.js"
 import { CustomRenderFC } from "@types"
 
@@ -9,8 +9,10 @@ const ButtonFallback: CustomRenderFC<ButtonRenderProps> = ({
     label,
 }) => (
     <Text
-        backgroundColor={isDisabled ? "gray" : "black"}
+        inverse={isFocused}
         underline={isFocused}
+        strikethrough={isDisabled}
+        backgroundColor={isDisabled ? 'gray' : 'black'}
     >
         {label}
     </Text>
