@@ -1,4 +1,4 @@
-import { useCursor, useCustomRenderElement, useFocusableElement } from "@hooks/index.js";
+import { useCursor, useCustomRenderElement, useFocusableElement, useSingleSelectableList } from "@hooks/index.js";
 import { RadioProps } from "./Radio.types.js";
 import RadioFallback from "./Radio.fallback.js";
 import { Option } from "@types";
@@ -15,7 +15,6 @@ const Radio = <T, >({
     ...rest
 }: RadioProps<T>) => {
     const [isOpened, setIsOpened] = useState(isAutoOpen)
-    const valueIndex = value ? options.indexOf(value) : null
 
     const {
         focus,
@@ -36,6 +35,16 @@ const Radio = <T, >({
     } = useCursor({
         maxPosition: options.length - 1,
         isCyclic: false,
+    })
+
+    const {
+        select,
+        valueIndex,
+    } = useSingleSelectableList({
+        list: options,
+        onSelect: onChange,
+        onUnselect: () => onChange(null),
+        value,
     })
 
     useInput((char, key) => {
@@ -60,13 +69,8 @@ const Radio = <T, >({
         }
     })
 
-    function change(value: Option<T> | null) {
-        onChange(value)
-    }
-
-    function submit(value: Option<T> | null) {
-        onSubmit(value)
-    }
+    const change = select.bind(this)
+    const submit = change
 
     function open() {
         setIsOpened(true)

@@ -1,4 +1,4 @@
-import { useCursor, useCustomRenderElement, useFocusableElement } from "@hooks/index.js";
+import { useMultipleSelectableList, useCursor, useCustomRenderElement, useFocusableElement } from "@hooks/index.js";
 import { CheckBoxProps, CheckBoxValue } from "./CheckBox.types.js";
 import CheckBoxFallback from "./CheckBox.fallback.js";
 import { useInput } from "ink";
@@ -25,6 +25,15 @@ const CheckBox = <T, >({
         isCyclic: false,
     })
 
+    const {
+        toggle,
+        valueIndexes,
+    } = useMultipleSelectableList({
+        list: options,
+        onToggle: onChange,
+        value,
+    })
+
     useInput((char, key) => {
         if (key.leftArrow || key.upArrow) {
             return moveCursor(-1)
@@ -37,7 +46,7 @@ const CheckBox = <T, >({
         if (key.return) {
             const optionUnderCursor = options.at(cursorPosition)!
 
-            return change(Array.from(new Set([...value, optionUnderCursor])))
+            return change(optionUnderCursor)
         }
     }, { isActive: isFocused })
 
@@ -46,17 +55,8 @@ const CheckBox = <T, >({
         ...rest
     })
 
-    function change(value: CheckBoxValue<T>) {
-        onChange(value)
-    }
-
-    function submit(value: CheckBoxValue<T>) {
-        onSubmit(value)
-    }
-
-    const valueIndexes = options.map((option) => {
-        return value.indexOf(option)
-    })
+    const change = toggle
+    const submit = toggle
 
     return Render({
         change,

@@ -1,14 +1,14 @@
 import { UseCursorOutput } from "@hooks/index.js"
 import {
+    ArrayInputElementProps,
+    ArrayInputElementRenderProps,
     CustomRenderElementProps,
     FocusableElementProps,
     FocusableElementRenderProps,
-    InputElementProps,
-    InputElementRenderProps,
     Option,
 } from "@types"
 
-export type CheckBoxValue<T> = Array<Option<T>>
+export type CheckBoxValue<T> = Option<T>
 
 export type CheckBoxRenderProps<T> = {
     options: Array<Option<T>>
@@ -16,11 +16,11 @@ export type CheckBoxRenderProps<T> = {
     cursorPosition: UseCursorOutput['cursorPosition']
 }
     & FocusableElementRenderProps
-    & InputElementRenderProps<CheckBoxValue<T>>
+    & ArrayInputElementRenderProps<CheckBoxValue<T>>
 
 export type CheckBoxProps<T> = {
     options: Array<Option<T>>
 }
     & FocusableElementProps
-    & InputElementProps<CheckBoxValue<T>>
+    & ArrayInputElementProps<CheckBoxValue<T>>
     & CustomRenderElementProps<CheckBoxRenderProps<T>>
