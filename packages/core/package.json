@@ -15,6 +15,7 @@
   "devDependencies": {
     "@ink-inputs/tsconfig": "^0.0.0",
     "@types/react": "^18.0.28",
+    "figures": "^5.0.0",
     "nodemon": "^2.0.22",
     "tsup": "^6.7.0",
     "typescript": "^5.0.2"
