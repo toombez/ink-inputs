@@ -139,6 +139,8 @@ const TextInput: React.FC<TextInputProps> = ({
         onSubmit(value)
     }
 
+    const isShowPlaceholder = !!placeholder && !value && !isFocused
+
     return Render({
         isFocused,
         isDisabled,
@@ -149,6 +151,7 @@ const TextInput: React.FC<TextInputProps> = ({
         charsAfterCursor,
         cursorPosition,
         placeholder,
+        isShowPlaceholder,
         value,
         change,
         focus,

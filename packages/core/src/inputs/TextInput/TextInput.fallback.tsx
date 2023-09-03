@@ -11,25 +11,32 @@ const TextInputFallback: CustomRenderFC<TextInputRenderProps> = ({
     charsBeforeCursor,
     charsUnderCursor,
     isCursorAtEnd,
+    value,
+    isShowPlaceholder,
 }) => {
     return (
         <Box minHeight={1}>
-            <Text
-                backgroundColor={isDisabled ? 'gray' : 'black'}
-                underline={isFocused}
-            >
-                {charsBeforeCursor}
-                <Text inverse={isFocused}>
-                    {charsUnderCursor}
+            {isShowPlaceholder
+                ? <Text>
+                    {placeholder}
                 </Text>
-                {charsAfterCursor}
-
-                {isCursorAtEnd && (
+                : <Text
+                    backgroundColor={isDisabled ? 'gray' : 'black'}
+                    underline={isFocused}
+                >
+                    {charsBeforeCursor}
                     <Text inverse={isFocused}>
-                        {" "}
+                        {charsUnderCursor}
                     </Text>
-                )}
-            </Text>
+                    {charsAfterCursor}
+
+                    {isCursorAtEnd && (
+                        <Text inverse={isFocused}>
+                            {" "}
+                        </Text>
+                    )}
+                </Text>
+            }
         </Box>
     )
 }
