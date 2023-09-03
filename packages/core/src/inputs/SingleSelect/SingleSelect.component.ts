@@ -41,6 +41,8 @@ const SingleSelect = <T, >({
     const {
         cursorPosition,
         moveCursor,
+        isCursorAtEnd,
+        isCursorAtStart,
     } = useCursor({
         maxPosition: options.length - 1,
         isCyclic: false,
@@ -90,6 +92,21 @@ const SingleSelect = <T, >({
     const change = select.bind(this)
     const submit = change
 
+    const showedOptionsLowerBound = isCursorAtStart
+        ? 0
+        : isCursorAtEnd
+            ? options.length - showCount
+            : cursorPosition - Math.floor(showCount / 2)
+    const showedOptionsUpperBound = isCursorAtEnd
+        ? options.length
+        : isCursorAtStart
+            ? showCount
+            : cursorPosition + Math.ceil(showCount / 2)
+
+    const showedOptions = options
+        .map<[Option<T>, number]>((option, index) => [option, index])
+        .slice(showedOptionsLowerBound, showedOptionsUpperBound)
+
     return Render({
         options,
         value,
@@ -100,6 +117,7 @@ const SingleSelect = <T, >({
         cursorPosition,
         showCount,
         valueIndex,
+        showedOptions,
         change,
         submit,
         focus,

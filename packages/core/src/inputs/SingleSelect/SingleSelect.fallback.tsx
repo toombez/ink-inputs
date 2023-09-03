@@ -10,36 +10,44 @@ const SingleSelectFallback: CustomRenderFC<SingleSelectRenderProps<any>> = ({
     placeholder,
     isOpened,
     isFocused,
+    isDisabled,
     cursorPosition,
-}) => {
-    return (
-        <Box flexDirection="column" minHeight={1}>
-            <Text underline={isFocused}>
-                {value ? value.label : placeholder || '---'}
-            </Text>
-            <Box
-                position="relative"
-                flexDirection="column"
-                display={isOpened ? 'flex' : 'none'}
-            >
-                {options
-                    .slice(
-                        Math.max(cursorPosition - Math.ceil(showCount / 2), 0),
-                        cursorPosition + Math.ceil(showCount / 2)
-                    )
-                    .map((option, index) => (
-                        <Text
-                            key={index}
-                            underline={cursorPosition === index}
-                            inverse={option === value}
-                        >
-                            {option.label}
-                        </Text>
-                    )
-                )}
-            </Box>
+    showedOptions,
+}) => (
+    <Box
+        flexDirection="column"
+        minHeight={1}
+    >
+        <Text
+            underline={isFocused}
+            inverse={isFocused}
+            strikethrough={isDisabled}
+        >
+            {value
+                ? value.label
+                : placeholder || '/'
+            }
+        </Text>
+        <Box
+            position="relative"
+            flexDirection="column"
+            display={isOpened ? 'flex' : 'none'}
+            borderColor="gray"
+            borderStyle="round"
+        >
+            {showedOptions
+                .map(([option, index]) => (
+                    <Text
+                        key={index}
+                        underline={cursorPosition === index}
+                        inverse={option === value}
+                    >
+                        {option.label}
+                    </Text>
+                )
+            )}
         </Box>
-    )
-}
+    </Box>
+)
 
 export default SingleSelectFallback
