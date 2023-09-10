@@ -1,3 +1,6 @@
+/**
+ * Ink-inputs `useOpenableElement` options
+ */
 export type UseOpenableElementOptions = {
     isAutoOpen?: boolean
 
@@ -6,6 +9,9 @@ export type UseOpenableElementOptions = {
     onToggle?: () => void
 }
 
+/**
+ * Ink-inputs `useOpenableElement` output
+ */
 export type UseOpenableElementOutput = {
     isOpened: boolean
     open: () => void

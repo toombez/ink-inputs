@@ -6,15 +6,15 @@ import type {
 /**
  * Options for useWideCursor
  */
+/**
+ * Ink-inputs `useWideCursor` options
+ */
 export type UseWideCursorOptions = {
-    /**
-     * Initial width
-     */
     initialWidth?: number
 } & UseCursorOptions
 
 /**
- * Output for useWideCursor
+ * Ink-inputs `useWideCursor` output
  */
 export type UseWideCursorOutput = {
     cursorWidth: number

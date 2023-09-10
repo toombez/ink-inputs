@@ -1,3 +1,6 @@
+/**
+ * Ink-inputs `useMultipleSelectableList` options
+ */
 export type UseMultipleSelectableListOptions<ValueType> = {
     list: Array<ValueType>
     value?: Array<ValueType>
@@ -7,6 +10,9 @@ export type UseMultipleSelectableListOptions<ValueType> = {
     onToggle?: (value: Array<ValueType>) => void
 }
 
+/**
+ * Ink-inputs `useMultipleSelectableList` output
+ */
 export type UseMultipleSelectableListOutput<ValueType> = {
     select: (valueToSelect: ValueType) => void
     unselect: (valueToUnselect: ValueType) => void
