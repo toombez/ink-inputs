@@ -10,10 +10,19 @@ export type IntellisenseOmit<
     [P in Exclude<keyof T, K>]: T[P]
 }
 
+/**
+ * Children prop used in the ink.js library
+ */
 export type InkChildren = React.ReactNode
 
+/**
+ * Ink.js `useFocus` hook options
+ */
 export type UseFocusOptions = NonNullable<Parameters<typeof useFocus>[0]>
 
+/**
+ * Ink.js `useFocus` hook output
+ */
 export type UseFocusOutput = ReturnType<typeof useFocus>
 
 export type CustomRenderFC<P extends object = {}> = React.FC<P>
