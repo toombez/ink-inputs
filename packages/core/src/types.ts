@@ -1,5 +1,15 @@
 import { useFocus } from "ink"
 
+/**
+ * Omit with intellisense
+ */
+export type IntellisenseOmit<
+  T,
+  K extends keyof T | (string & {}) | (number & {}) | (symbol | {})
+> = {
+    [P in Exclude<keyof T, K>]: T[P]
+}
+
 export type InkChildren = React.ReactNode
 
 export type UseFocusOptions = NonNullable<Parameters<typeof useFocus>[0]>
