@@ -104,7 +104,7 @@ export type ArrayInputElementProps<ValueType> = InputElementProps<
  *
  * @template ValueType type value that user input
  */
-export type ArrayInputElementRenderProps<ValueType> = Omit<
+export type ArrayInputElementRenderProps<ValueType> = IntellisenseOmit<
     InputElementRenderProps<Array<ValueType>>,
     'change'
     | 'submit'
