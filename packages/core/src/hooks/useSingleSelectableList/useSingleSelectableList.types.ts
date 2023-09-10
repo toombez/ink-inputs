@@ -1,20 +1,24 @@
 /**
  * Ink-inputs `useSingleSelectableList` options
+ *
+ * @template Value type of option's value
  */
-export type UseSingleSelectableListOptions<ValueType> = {
-    value?: ValueType | null
-    list: Array<ValueType>
+export type UseSingleSelectableListOptions<Value> = {
+    value?: Value | null
+    list: Array<Value>
 
-    onSelect?: (value: ValueType | null) => void
+    onSelect?: (value: Value | null) => void
     onUnselect?: () => void
 }
 
 /**
  * Ink-inputs `useSingleSelectableList` output
+ *
+ * @template Value type of option's value
  */
-export type UseSingleSelectableListOutput<ValueType> = {
-    value: ValueType | null
+export type UseSingleSelectableListOutput<Value> = {
+    value: Value | null
     valueIndex: number | null
 
-    select: (value: ValueType | null) => void
+    select: (value: Value | null) => void
 }

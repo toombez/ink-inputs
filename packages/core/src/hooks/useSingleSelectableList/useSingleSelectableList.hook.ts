@@ -1,14 +1,14 @@
 import { UseSingleSelectableListOptions, UseSingleSelectableListOutput } from "./useSingleSelectableList.types.js";
 
-const useSingleSelectableList = <ValueType>({
+const useSingleSelectableList = <Value>({
     list,
     value = null,
 
     onSelect = () => {},
-}: UseSingleSelectableListOptions<ValueType>): UseSingleSelectableListOutput<ValueType> => {
+}: UseSingleSelectableListOptions<Value>): UseSingleSelectableListOutput<Value> => {
     const valueIndex = value ? list.indexOf(value) : null
 
-    function select(value: ValueType | null) {
+    function select(value: Value | null) {
         onSelect(value)
     }
     return {

@@ -11,33 +11,39 @@ import {
 } from "@types"
 
 /**
- * Type of value for `SingleSelect` UI element
+ * Type for `SingleSelect` options
+ *
+ * @template Value type of `SingleSelect` option's value
  */
-export type SingleSelectValue<ValueType> = Option<ValueType> | null
+export type SingleSelectValue<Value> = Option<Value> | null
 
 /**
  * Type of props for custom render functional component of `SingleSelect` UI
  * element
+ *
+ * @template Value type of `SingleSelect` option's value
  */
-export type SingleSelectRenderProps<T> = {
-    options: Array<Option<T>>
+export type SingleSelectRenderProps<Value> = {
+    options: Array<Option<Value>>
     showCount: number
     valueIndex: number | null
     cursorPosition: UseCursorOutput['cursorPosition']
-    showedOptions: Array<[Option<T>, number]>
+    showedOptions: Array<[Option<Value>, number]>
 }
     & FocusableElementRenderProps
-    & InputElementRenderProps<SingleSelectValue<T>>
+    & InputElementRenderProps<SingleSelectValue<Value>>
     & OpenableElementRenderProps
 
 /**
  * Type of props for `SingleSelect` UI element
+ *
+ * @template Value type of `SingleSelect` option's value
  */
-export type SingleSelectProps<T> = {
-    options: Array<Option<T>>
+export type SingleSelectProps<Value> = {
+    options: Array<Option<Value>>
     showCount?: number
 }
     & FocusableElementProps
-    & InputElementProps<SingleSelectValue<T>>
-    & CustomRenderElementProps<SingleSelectRenderProps<T>>
+    & InputElementProps<SingleSelectValue<Value>>
+    & CustomRenderElementProps<SingleSelectRenderProps<Value>>
     & OpenableElementProps

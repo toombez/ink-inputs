@@ -1,16 +1,16 @@
 import { UseMultipleSelectableListOptions, UseMultipleSelectableListOutput } from "./useMultipleSelectableList.types.js";
 
-const useMultipleSelectableList = <ValueType>({
+const useMultipleSelectableList = <Value>({
     onSelect = () => {},
     onUnselect = () => {},
     onToggle = () => {},
     value = [],
     list,
-}: UseMultipleSelectableListOptions<ValueType>
-): UseMultipleSelectableListOutput<ValueType> => {
+}: UseMultipleSelectableListOptions<Value>
+): UseMultipleSelectableListOutput<Value> => {
     const valueIndexes = value.map((value) => list.indexOf(value))
 
-    function _select(valueToSelect: ValueType) {
+    function _select(valueToSelect: Value) {
         const newValue =[...value, valueToSelect]
 
         onSelect(newValue)
@@ -18,7 +18,7 @@ const useMultipleSelectableList = <ValueType>({
         return newValue
     }
 
-    function _unselect(valueToUnselect: ValueType) {
+    function _unselect(valueToUnselect: Value) {
         const newValue = value.filter((value) => value !== valueToUnselect)
 
         onUnselect(newValue)
@@ -26,11 +26,11 @@ const useMultipleSelectableList = <ValueType>({
         return newValue
     }
 
-    function isValueSelected(valueToCheck: ValueType) {
+    function isValueSelected(valueToCheck: Value) {
         return value.includes(valueToCheck)
     }
 
-    function select(valueToSelect: ValueType) {
+    function select(valueToSelect: Value) {
         if (isValueSelected(valueToSelect)) {
             return
         }
@@ -38,7 +38,7 @@ const useMultipleSelectableList = <ValueType>({
         _select(valueToSelect)
     }
 
-    function unselect(valueToUnselect: ValueType) {
+    function unselect(valueToUnselect: Value) {
         if (!isValueSelected(valueToUnselect)) {
             return
         }
@@ -46,7 +46,7 @@ const useMultipleSelectableList = <ValueType>({
         _unselect(valueToUnselect)
     }
 
-    function toggle(valueToToggle: ValueType) {
+    function toggle(valueToToggle: Value) {
         const handler = !isValueSelected(valueToToggle)
             ? _select
             : _unselect

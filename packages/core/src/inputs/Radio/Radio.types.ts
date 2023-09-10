@@ -10,25 +10,34 @@ import {
     Option,
 } from "@types"
 
-export type RadioValue<T> = Option<T> | null
+/**
+ * Type for `Radio` options
+ *
+ * @template Value type of `Radio` option's value
+ */
+export type RadioValue<Value> = Option<Value> | null
 
 /**
  * Type of props for custom render functional component of `Radio` UI element
+ *
+ * @template Value type of `Radio` option's value
  */
-export type RadioRenderProps<T> = {
-    options: Array<Option<T>>
+export type RadioRenderProps<Value> = {
+    options: Array<Option<Value>>
     valueIndex: number | null
     cursorPosition: UseCursorOutput['cursorPosition']
 }
     & FocusableElementRenderProps
-    & InputElementRenderProps<RadioValue<T>>
+    & InputElementRenderProps<RadioValue<Value>>
 
 /**
  * Type of props for `Radio` UI element
+ *
+ * @template Value type of `Radio` option's value
  */
-export type RadioProps<T> = {
-    options: Array<Option<T>>
+export type RadioProps<Value> = {
+    options: Array<Option<Value>>
 }
     & FocusableElementProps
-    & InputElementProps<RadioValue<T>>
-    & CustomRenderElementProps<RadioRenderProps<T>>
+    & InputElementProps<RadioValue<Value>>
+    & CustomRenderElementProps<RadioRenderProps<Value>>

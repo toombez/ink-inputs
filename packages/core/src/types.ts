@@ -2,12 +2,18 @@ import { useFocus } from "ink"
 
 /**
  * Omit with intellisense
+ *
+ * @template Type target type
+ * @template ExcludeKeys keys to exclude from `Type`
  */
 export type IntellisenseOmit<
-  T,
-  K extends keyof T | (string & {}) | (number & {}) | (symbol | {})
+    Type,
+    ExcludeKeys extends keyof Type
+        | (string & {})
+        | (number & {})
+        | (symbol | {})
 > = {
-    [P in Exclude<keyof T, K>]: T[P]
+    [Field in Exclude<keyof Type, ExcludeKeys>]: Type[Field]
 }
 
 /**
@@ -57,6 +63,8 @@ export type FocusableElementRenderProps = {
 /**
  * Type of props for the UI element component that implemented the ability to
  * pass a custom render functional component
+ *
+ * @template RenderProps type of props for custom render functional component
  */
 export type CustomRenderElementProps<RenderProps extends Object = {}> = {
     children?: CustomRenderFC<RenderProps>
@@ -66,35 +74,37 @@ export type CustomRenderElementProps<RenderProps extends Object = {}> = {
 /**
  * Type of props for the UI element component that implemented the ability to
  * enter user data
+ *
+ * @template Value type of value that the user inputs
  */
-export type InputElementProps<ValueType> = {
+export type InputElementProps<Value> = {
     placeholder?: string
-    value?: ValueType
-    onChange?: (value: ValueType) => void
-    onSubmit?: (value: ValueType) => void
+    value?: Value
+    onChange?: (value: Value) => void
+    onSubmit?: (value: Value) => void
 }
 
 /**
  * Type of props for the custom functional component renderer component of the
  * UI element component that implemented the the ability to input user data
  *
- * @template ValueType type value that user input
+ * @template Value type of value that the user inputs
  */
-export type InputElementRenderProps<ValueType> = {
+export type InputElementRenderProps<Value> = {
     placeholder: string
-    value: ValueType
-    change: (value: ValueType) => void
-    submit: (value: ValueType) => void
+    value: Value
+    change: (value: Value) => void
+    submit: (value: Value) => void
 }
 
 /**
  * Type of props for a UI element component that implemented the ability to
  * enter user data as an array
  *
- * @template ValueType type value that user input
+ * @template Value type of value that the user inputs
  */
-export type ArrayInputElementProps<ValueType> = InputElementProps<
-    Array<ValueType>
+export type ArrayInputElementProps<Value> = InputElementProps<
+    Array<Value>
 >
 
 /**
@@ -102,15 +112,15 @@ export type ArrayInputElementProps<ValueType> = InputElementProps<
  * element component that implemented the ability to input user data as an
  * array
  *
- * @template ValueType type value that user input
+ * @template Value type of value in array that the user inputs
  */
-export type ArrayInputElementRenderProps<ValueType> = IntellisenseOmit<
-    InputElementRenderProps<Array<ValueType>>,
+export type ArrayInputElementRenderProps<Value> = IntellisenseOmit<
+    InputElementRenderProps<Array<Value>>,
     'change'
     | 'submit'
 > & {
-    change: (value: ValueType) => void
-    submit: (value: ValueType) => void
+    change: (value: Value) => void
+    submit: (value: Value) => void
 }
 
 /**
@@ -133,8 +143,10 @@ export type OpenableElementRenderProps = {
 
 /**
  * Type for data that can be selected from a list and rendered
+ *
+ * @template Value type of option's value
  */
-export type Option<ValueType> = {
+export type Option<Value> = {
     label: string
-    value: ValueType
+    value: Value
 }
