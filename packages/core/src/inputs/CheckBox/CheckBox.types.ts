@@ -10,6 +10,10 @@ import {
 
 export type CheckBoxValue<T> = Option<T>
 
+/**
+ * Type of props for custom render functional component of `CheckBox` UI
+ * element
+ */
 export type CheckBoxRenderProps<T> = {
     options: Array<Option<T>>
     valueIndexes: Array<number>
@@ -18,6 +22,9 @@ export type CheckBoxRenderProps<T> = {
     & FocusableElementRenderProps
     & ArrayInputElementRenderProps<CheckBoxValue<T>>
 
+/**
+ * Type of props for `CheckBox` UI element
+ */
 export type CheckBoxProps<T> = {
     options: Array<Option<T>>
 }

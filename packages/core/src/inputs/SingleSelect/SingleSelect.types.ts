@@ -10,8 +10,15 @@ import {
     Option,
 } from "@types"
 
-export type SingleSelectValue<T> = Option<T> | null
+/**
+ * Type of value for `SingleSelect` UI element
+ */
+export type SingleSelectValue<ValueType> = Option<ValueType> | null
 
+/**
+ * Type of props for custom render functional component of `SingleSelect` UI
+ * element
+ */
 export type SingleSelectRenderProps<T> = {
     options: Array<Option<T>>
     showCount: number
@@ -23,6 +30,9 @@ export type SingleSelectRenderProps<T> = {
     & InputElementRenderProps<SingleSelectValue<T>>
     & OpenableElementRenderProps
 
+/**
+ * Type of props for `SingleSelect` UI element
+ */
 export type SingleSelectProps<T> = {
     options: Array<Option<T>>
     showCount?: number
