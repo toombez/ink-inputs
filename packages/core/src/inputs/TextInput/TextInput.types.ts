@@ -12,9 +12,24 @@ import {
  * element
  */
 export type TextInputRenderProps = {
+    /**
+     * Characters from the value string that are before the cursor
+     */
     charsBeforeCursor: string
+
+    /**
+     * Characters from the value string that are under the cursor
+     */
     charsUnderCursor: string
+
+    /**
+     * Characters from the value string that are after the cursor
+     */
     charsAfterCursor: string
+
+    /**
+     * Specifies whether to display the placeholder
+     */
     isShowPlaceholder: boolean
 }
     & FocusableElementRenderProps

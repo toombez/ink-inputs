@@ -23,8 +23,19 @@ export type RadioValue<Value> = Option<Value> | null
  * @template Value type of `Radio` option's value
  */
 export type RadioRenderProps<Value> = {
+    /**
+     * List of options from which to choose
+     */
     options: Array<Option<Value>>
+
+    /**
+     * Selected option index
+     */
     valueIndex: number | null
+
+    /**
+     * Cursor current position
+     */
     cursorPosition: UseCursorOutput['cursorPosition']
 }
     & FocusableElementRenderProps
@@ -36,6 +47,9 @@ export type RadioRenderProps<Value> = {
  * @template Value type of `Radio` option's value
  */
 export type RadioProps<Value> = {
+    /**
+     * List of options from which to choose
+     */
     options: Array<Option<Value>>
 }
     & FocusableElementProps

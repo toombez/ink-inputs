@@ -22,8 +22,19 @@ export type CheckBoxValue<Value> = Option<Value>
  * @template Value type of `CheckBox` option's value
  */
 export type CheckBoxRenderProps<Value> = {
+    /**
+     * List of options from which to choose
+     */
     options: Array<Option<Value>>
+
+    /**
+     * Selected option indexes array
+     */
     valueIndexes: Array<number>
+
+    /**
+     * Cursor current position
+     */
     cursorPosition: UseCursorOutput['cursorPosition']
 }
     & FocusableElementRenderProps
@@ -35,6 +46,9 @@ export type CheckBoxRenderProps<Value> = {
  * @template Value type of `CheckBox` option's value
  */
 export type CheckBoxProps<Value> = {
+    /**
+     * List of options from which to choose
+     */
     options: Array<Option<Value>>
 }
     & FocusableElementProps

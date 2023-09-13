@@ -24,10 +24,29 @@ export type SingleSelectValue<Value> = Option<Value> | null
  * @template Value type of `SingleSelect` option's value
  */
 export type SingleSelectRenderProps<Value> = {
+    /**
+     * List of options from which to choose
+     */
     options: Array<Option<Value>>
+
+    /**
+     * Number of items to display
+     */
     showCount: number
+
+    /**
+     * Selected option index
+     */
     valueIndex: number | null
+
+    /**
+     * Cursor position
+     */
     cursorPosition: UseCursorOutput['cursorPosition']
+
+    /**
+     * Options to be displayed
+     */
     showedOptions: Array<[Option<Value>, number]>
 }
     & FocusableElementRenderProps
@@ -40,7 +59,14 @@ export type SingleSelectRenderProps<Value> = {
  * @template Value type of `SingleSelect` option's value
  */
 export type SingleSelectProps<Value> = {
+    /**
+     * List of options from which to choose
+     */
     options: Array<Option<Value>>
+
+    /**
+     * Number of items to display
+     */
     showCount?: number
 }
     & FocusableElementProps
