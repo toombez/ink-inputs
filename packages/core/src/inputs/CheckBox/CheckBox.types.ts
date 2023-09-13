@@ -8,19 +8,49 @@ import {
     Option,
 } from "@types"
 
-export type CheckBoxValue<T> = Option<T>
+/**
+ * Type for `CheckBox` options
+ *
+ * @template Value type of `CheckBox` option's value
+ */
+export type CheckBoxValue<Value> = Option<Value>
 
-export type CheckBoxRenderProps<T> = {
-    options: Array<Option<T>>
+/**
+ * Type of props for custom render functional component of `CheckBox` UI
+ * element
+ *
+ * @template Value type of `CheckBox` option's value
+ */
+export type CheckBoxRenderProps<Value> = {
+    /**
+     * List of options from which to choose
+     */
+    options: Array<Option<Value>>
+
+    /**
+     * Selected option indexes array
+     */
     valueIndexes: Array<number>
+
+    /**
+     * Cursor current position
+     */
     cursorPosition: UseCursorOutput['cursorPosition']
 }
     & FocusableElementRenderProps
-    & ArrayInputElementRenderProps<CheckBoxValue<T>>
+    & ArrayInputElementRenderProps<CheckBoxValue<Value>>
 
-export type CheckBoxProps<T> = {
-    options: Array<Option<T>>
+/**
+ * Type of props for `CheckBox` UI element
+ *
+ * @template Value type of `CheckBox` option's value
+ */
+export type CheckBoxProps<Value> = {
+    /**
+     * List of options from which to choose
+     */
+    options: Array<Option<Value>>
 }
     & FocusableElementProps
-    & ArrayInputElementProps<CheckBoxValue<T>>
-    & CustomRenderElementProps<CheckBoxRenderProps<T>>
+    & ArrayInputElementProps<CheckBoxValue<Value>>
+    & CustomRenderElementProps<CheckBoxRenderProps<Value>>

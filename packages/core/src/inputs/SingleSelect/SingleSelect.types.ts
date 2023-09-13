@@ -10,24 +10,66 @@ import {
     Option,
 } from "@types"
 
-export type SingleSelectValue<T> = Option<T> | null
+/**
+ * Type for `SingleSelect` options
+ *
+ * @template Value type of `SingleSelect` option's value
+ */
+export type SingleSelectValue<Value> = Option<Value> | null
 
-export type SingleSelectRenderProps<T> = {
-    options: Array<Option<T>>
+/**
+ * Type of props for custom render functional component of `SingleSelect` UI
+ * element
+ *
+ * @template Value type of `SingleSelect` option's value
+ */
+export type SingleSelectRenderProps<Value> = {
+    /**
+     * List of options from which to choose
+     */
+    options: Array<Option<Value>>
+
+    /**
+     * Number of items to display
+     */
     showCount: number
+
+    /**
+     * Selected option index
+     */
     valueIndex: number | null
+
+    /**
+     * Cursor position
+     */
     cursorPosition: UseCursorOutput['cursorPosition']
-    showedOptions: Array<[Option<T>, number]>
+
+    /**
+     * Options to be displayed
+     */
+    showedOptions: Array<[Option<Value>, number]>
 }
     & FocusableElementRenderProps
-    & InputElementRenderProps<SingleSelectValue<T>>
+    & InputElementRenderProps<SingleSelectValue<Value>>
     & OpenableElementRenderProps
 
-export type SingleSelectProps<T> = {
-    options: Array<Option<T>>
+/**
+ * Type of props for `SingleSelect` UI element
+ *
+ * @template Value type of `SingleSelect` option's value
+ */
+export type SingleSelectProps<Value> = {
+    /**
+     * List of options from which to choose
+     */
+    options: Array<Option<Value>>
+
+    /**
+     * Number of items to display
+     */
     showCount?: number
 }
     & FocusableElementProps
-    & InputElementProps<SingleSelectValue<T>>
-    & CustomRenderElementProps<SingleSelectRenderProps<T>>
+    & InputElementProps<SingleSelectValue<Value>>
+    & CustomRenderElementProps<SingleSelectRenderProps<Value>>
     & OpenableElementProps

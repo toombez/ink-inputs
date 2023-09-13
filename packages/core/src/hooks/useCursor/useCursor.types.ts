@@ -1,14 +1,14 @@
 /**
- * Options for useCursor hook
+ * Ink-inputs `useCursor` hook options
  */
 export type UseCursorOptions = {
     /**
-     * Maximal cursor position
+     * Maximum position that the cursor does not reach
      */
     maxPosition: number
 
     /**
-     * Minimal cursor position
+     * The minimum position at which a course can hold
      */
     minPosition?: number
 
@@ -18,66 +18,63 @@ export type UseCursorOptions = {
     initialPosition?: number
 
     /**
-     * Is looped cursor position range
+     *  Whether the cursor position range is looped
      */
     isCyclic?: boolean
 }
 
 /**
- * Output for useCursor hook
+ * Ink-inputs `useCursor` hook output
  */
 export type UseCursorOutput = {
     /**
-     * Cursor position
+     * Current cursor position
      */
     cursorPosition: number
 
     /**
-     * Is cursor position at minilal allowed position
+     * Indicates whether the cursor is at the start
      */
     isCursorAtStart: boolean
 
     /**
-     * Is cursor position at maximal allowed position
+     * Indicates whether the cursor is at the end
      */
     isCursorAtEnd: boolean
 
     /**
-     * Position before cursor
-     *
-     * TODO: rename to `beforeCursorPosition`
+     * Position in front of the cursor
      */
     indexBeforeCursor: number
 
     /**
-     * Position after cursor
-     *
-     * TODO: rename to `afterCursorPosition`
+     * The position after the cursor.
      */
     indexAfterCursor: number
 
     /**
-     * Move cursor to position
-     * @param position new cursor position
+     * Move the cursor to new position
+     * @param position new position
      * @returns
      */
     moveCursorTo: (position: number) => void
 
     /**
-     * Move cursor by delta
-     * @param delta delta to move cursor
+     * Move the cursor relative to the current position
+     * @param delta the offset by which the cursor should be moved from the
+     * current position
      * @returns
      */
     moveCursor: (delta: number) => void
 
     /**
-     * Move cursor to minimal allowed position
+     * Move the cursor to the start
      * @returns
      */
     moveCursorToStart: () => void
 
     /**
-     * Move cursor to maximal allowed position
+     * Move the cursor to the end
      * @returns
      */
     moveCursorToEnd: () => void
