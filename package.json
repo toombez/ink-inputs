@@ -9,10 +9,10 @@
   "scripts": {
     "build": "turbo run build",
     "dev": "turbo run dev --parallel",
-    "examples": "cd apps/examples && yarn run dev",
+    "demo": "cd apps/demo && pnpm run dev",
 
-    "libs:dev": "yarn run dev --filter=\"!./apps/*\"",
-    "libs:build": "yarn run build --filter=\"!@ink-inputs\\apps\""
+    "libs:dev": "pnpm run dev --filter=\"!./apps/*\"",
+    "libs:build": "pnpm run build --filter=\"!@ink-inputs\\apps\""
   },
   "engines": {
     "node": ">=16"
