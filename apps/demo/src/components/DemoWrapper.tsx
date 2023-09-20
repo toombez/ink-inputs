@@ -10,7 +10,11 @@ const DemoWrapper: React.FC<DemoWrapperProps> = ({
     children,
 }) => {
     return (
-        <Box flexDirection="column">
+        <Box
+            flexDirection="column"
+            borderStyle="single"
+            borderColor="magenta"
+        >
             <Text>
                 {label}:
             </Text>
